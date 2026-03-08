@@ -1,0 +1,355 @@
+﻿<!DOCTYPE html>
+<html class="dark" lang="vi">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&family=Noto+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#dc1f18",
+                        "background-dark": "#160a0a",
+                        "card-dark": "#211111",
+                        "border-dark": "#3d1f1f"
+                    },
+                    fontFamily: {
+                        display: ["Noto Serif", "serif"],
+                        sans: ["Noto Sans", "sans-serif"]
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        body {
+            font-family: 'Noto Sans', sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        .font-display {
+            font-family: 'Noto Serif', serif;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #160a0a;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #3d1f1f;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body class="bg-background-dark text-slate-100 min-h-screen flex items-center justify-center p-0 md:p-2">
+    <div
+        class="relative w-full h-full md:h-[95vh] max-w-6xl overflow-hidden rounded-none md:rounded-xl bg-card-dark border border-border-dark flex flex-col shadow-2xl shadow-black/50">
+        <div class="relative h-72 w-full shrink-0">
+            <div id="hero-bg" class="absolute inset-0 bg-cover bg-center"></div>
+            <div
+                class="absolute inset-0 bg-gradient-to-r from-background-dark/85 via-background-dark/40 to-transparent">
+            </div>
+            <div class="absolute bottom-0 left-0 p-8 w-full z-10">
+                <div class="flex flex-col gap-3">
+                    <div class="flex items-center gap-2 text-primary">
+                        <span class="material-symbols-outlined text-sm">history_edu</span>
+                        <span id="event-label" class="text-xs font-bold uppercase tracking-widest">Sự kiện lịch sử quan
+                            trọng</span>
+                    </div>
+                    <h1 id="hero-title" class="text-3xl md:text-5xl font-bold leading-tight max-w-4xl"></h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-1 overflow-hidden">
+            <div class="flex-1 overflow-y-auto custom-scrollbar p-6 md:p-8 space-y-10">
+                <section>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="h-8 w-1 bg-primary"></div>
+                        <h2 class="text-2xl font-bold">Bối cảnh lịch sử</h2>
+                    </div>
+                    <p id="context-text" class="text-slate-300 leading-relaxed text-lg"></p>
+                </section>
+
+                <section>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="h-8 w-1 bg-primary"></div>
+                        <h2 class="text-2xl font-bold">Chính sách then chốt</h2>
+                    </div>
+                    <div id="policy-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                </section>
+
+                <section>
+                    <div class="bg-primary/10 border border-primary/20 rounded-xl p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="material-symbols-outlined text-primary">verified</span>
+                            <h2 class="text-xl font-bold">Kết quả đạt được</h2>
+                        </div>
+                        <p id="result-text" class="text-slate-300"></p>
+                    </div>
+                </section>
+            </div>
+
+            <aside
+                class="w-80 bg-background-dark/50 border-l border-border-dark p-6 overflow-y-auto custom-scrollbar space-y-8 hidden lg:block">
+                <div>
+                    <h3 class="text-sm font-bold text-slate-500 uppercase tracking-widest mb-4">Lãnh đạo chủ chốt</h3>
+                    <div id="leader-list" class="space-y-4"></div>
+                </div>
+
+                <div>
+                    <h3 class="text-sm font-bold text-slate-500 uppercase tracking-widest mb-4">Địa điểm</h3>
+                    <div class="flex items-center gap-3 text-slate-300">
+                        <span class="material-symbols-outlined text-primary">location_on</span>
+                        <p id="location-text" class="text-sm font-medium"></p>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-sm font-bold text-slate-500 uppercase tracking-widest mb-4">Chỉ số thống kê</h3>
+                    <div id="stats-list" class="space-y-4"></div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <script>
+        const phaseData = {
+            "tu-lieu": {
+                label: "Tổng quan hành trình đổi mới",
+                title: "Tư liệu: Hành trình Đổi mới",
+                image: "https://vanhoathoidai.vn/uploads/images/blog/huyhoang/2025/07/20/z6823925834733-ebdf9d8ffc5bbc6349b22391bb827933-1753019646.jpg",
+                context: "Bức tranh tổng quan các giai đoạn phát triển của Việt Nam từ sau đổi mới, tập trung vào chuyển biến kinh tế, thể chế và hội nhập quốc tế.",
+                policies: [
+                    { icon: "timeline", title: "Theo dòng thời gian", desc: "Hệ thống lại các mốc then chốt từ 1986 đến nay." },
+                    { icon: "hub", title: "Liên kết chính sách", desc: "Nối các quyết sách lớn với tác động thực tế." },
+                    { icon: "public", title: "Góc nhìn hội nhập", desc: "Làm rõ tiến trình tham gia sâu vào kinh tế toàn cầu." },
+                    { icon: "school", title: "Tư liệu học tập", desc: "Phù hợp tra cứu, học tập và thuyết trình lịch sử kinh tế." }
+                ],
+                result: "Nắm được toàn cảnh đổi mới một cách trực quan, mạch lạc và dễ so sánh giữa các giai đoạn.",
+                leaders: ["Nhiều thế hệ lãnh đạo", "Đội ngũ cải cách trung ương"],
+                location: "Việt Nam (toàn quốc)",
+                stats: [{ label: "Giai đoạn", value: "1986-2025" }, { label: "Mốc chính", value: "9" }]
+            },
+            "1986": {
+                label: "Sự kiện lịch sử quan trọng",
+                title: "1986: Đại hội VI - Khởi xướng Đổi mới",
+                image: "https://petrovietnam.petrotimes.vn/stores/news_dataimages/nguyenphuong/102021/27/19/in_article/0335_dang-cong-san-viet-nam---niem-tin-niem-tu-hao-cua-dan-toc-viet-nam-1-164250.jpg?rt=20211027190336",
+                context: "Đứng trước khủng hoảng kinh tế - xã hội kéo dài, Việt Nam xác lập đường lối đổi mới toàn diện, chuyển từ cơ chế bao cấp sang vận hành theo cơ chế thị trường định hướng xã hội chủ nghĩa.",
+                policies: [
+                    { icon: "payments", title: "Xóa bao cấp", desc: "Từng bước bãi bỏ phân phối theo tem phiếu, tháo gỡ ách tắc lưu thông." },
+                    { icon: "groups", title: "Kinh tế nhiều thành phần", desc: "Thừa nhận vai trò của nhiều khu vực kinh tế cùng phát triển." },
+                    { icon: "inventory_2", title: "Ưu tiên sản xuất", desc: "Tập trung lương thực, thực phẩm, hàng tiêu dùng và xuất khẩu." },
+                    { icon: "psychology", title: "Đổi mới tư duy", desc: "Đề cao tư duy thực tiễn, nhìn thẳng vào sự thật." }
+                ],
+                result: "Mở ra bước ngoặt phát triển mới, tạo nền tảng cho tăng trưởng dài hạn và hội nhập quốc tế sau này.",
+                leaders: ["Trường Chinh", "Nguyễn Văn Linh"],
+                location: "Hà Nội",
+                stats: [{ label: "Lạm phát trước đổi mới", value: "~774%" }, { label: "Mức độ cải cách", value: "Toàn diện" }]
+            },
+            "1988": {
+                label: "Giai đoạn mở rộng sản xuất",
+                title: "1988: Cải cách nông nghiệp và mở đường công nghiệp",
+                image: "https://petrovietnam.petrotimes.vn/stores/news_dataimages/nguyenphuong/102021/27/17/in_article/2809_Untitled.jpg?rt=20211027172812",
+                context: "Cải cách quyền sử dụng đất trong nông nghiệp kết hợp mở cửa đầu tư nước ngoài không chỉ phục hồi sản xuất nông thôn mà còn tạo nền cho công nghiệp chế biến và phát triển hạ tầng.",
+                policies: [
+                    { icon: "agriculture", title: "Khoán sản phẩm", desc: "Giao quyền chủ động sản xuất cho hộ nông dân." },
+                    { icon: "currency_exchange", title: "Mở cửa FDI", desc: "Hình thành hành lang cho vốn đầu tư vào nông nghiệp và công nghiệp." },
+                    { icon: "factory", title: "Phát triển chế biến", desc: "Thúc đẩy các cơ sở chế biến nông sản và công nghiệp nhẹ." },
+                    { icon: "trending_up", title: "Phục hồi tăng trưởng", desc: "Kích hoạt động lực mới cho cả sản xuất nông nghiệp và công nghiệp." }
+                ],
+                result: "Nông nghiệp tăng mạnh, đồng thời công nghiệp chế biến và khu vực sản xuất hàng hóa bắt đầu mở rộng rõ rệt.",
+                leaders: ["Lãnh đạo trung ương", "Khối quản lý nông nghiệp - công nghiệp"],
+                location: "Việt Nam (nông thôn)",
+                stats: [{ label: "Trọng tâm", value: "Nông nghiệp + Công nghiệp" }, { label: "Tác động", value: "Rộng khắp" }]
+            },
+            "1993": {
+                label: "Cải cách thể chế đất đai",
+                title: "1993: Hoàn thiện khung pháp lý đất đai",
+                image: "https://th.bing.com/th/id/R.eb8dd5a8d36fc0b46b6afcc5ff6108a3?rik=A2xRxze6rO9XXQ&pid=ImgRaw&r=0",
+                context: "Khung pháp lý đất đai được hoàn thiện tạo điều kiện cho sản xuất, đầu tư và sử dụng tài sản hiệu quả hơn.",
+                policies: [
+                    { icon: "gavel", title: "Luật hóa quyền sử dụng", desc: "Xác lập rõ quyền, nghĩa vụ của người sử dụng đất." },
+                    { icon: "receipt_long", title: "Chuẩn hóa thủ tục", desc: "Tăng tính minh bạch trong cấp và quản lý đất." },
+                    { icon: "home_work", title: "Mở rộng giao dịch", desc: "Tạo điều kiện luân chuyển và khai thác giá trị đất." },
+                    { icon: "eco", title: "Động lực nông thôn", desc: "Thúc đẩy đầu tư và sản xuất tại khu vực nông nghiệp." }
+                ],
+                result: "Tạo nền móng thể chế quan trọng cho tăng trưởng khu vực sản xuất và bất động sản giai đoạn sau.",
+                leaders: ["Khối lập pháp", "Khối quản lý đất đai"],
+                location: "Việt Nam",
+                stats: [{ label: "Phạm vi", value: "Toàn quốc" }, { label: "Tác động", value: "Dài hạn" }]
+            },
+            "1996": {
+                label: "Đẩy mạnh công nghiệp hóa",
+                title: "1996: Tăng tốc hiện đại hóa đất nước",
+                image: "https://img.loigiaihay.com/picture/article/2015/0823/ch20-0.jpg",
+                context: "Giai đoạn ưu tiên phát triển công nghiệp, hạ tầng và năng lực sản xuất để chuyển dịch cơ cấu kinh tế.",
+                policies: [
+                    { icon: "factory", title: "Phát triển công nghiệp", desc: "Mở rộng các ngành chế biến và sản xuất chủ lực." },
+                    { icon: "domain", title: "Đầu tư hạ tầng", desc: "Nâng cấp giao thông, điện năng và logistics." },
+                    { icon: "construction", title: "Khu công nghiệp", desc: "Hình thành các cụm sản xuất tập trung." },
+                    { icon: "memory", title: "Tiếp cận công nghệ", desc: "Tăng năng lực kỹ thuật và quản trị sản xuất." }
+                ],
+                result: "Cơ cấu kinh tế chuyển dịch nhanh, công nghiệp giữ vai trò ngày càng lớn trong tăng trưởng.",
+                leaders: ["Khối hoạch định kinh tế", "Lãnh đạo địa phương"],
+                location: "Các vùng công nghiệp trọng điểm",
+                stats: [{ label: "Trọng tâm", value: "Công nghiệp" }, { label: "Mức độ", value: "Tăng tốc" }]
+            },
+            "2007": {
+                label: "Hội nhập toàn cầu",
+                title: "2007: Việt Nam gia nhập WTO",
+                image: "https://phunuvietnam.mediacdn.vn/179072216278405120/2023/12/25/anh-ngoc-khoi-17035121491081711497012.jpg",
+                context: "Gia nhập WTO đánh dấu bước ngoặt hội nhập sâu với thị trường toàn cầu và thúc đẩy cải cách thể chế trong nước.",
+                policies: [
+                    { icon: "public", title: "Mở cửa thương mại", desc: "Gắn kết mạnh hơn với thị trường quốc tế." },
+                    { icon: "rule", title: "Chuẩn hóa thể chế", desc: "Tiệm cận chuẩn mực cạnh tranh và pháp lý quốc tế." },
+                    { icon: "shopping_cart", title: "Mở rộng xuất khẩu", desc: "Doanh nghiệp tận dụng tốt hơn các thị trường mới." },
+                    { icon: "workspaces", title: "Thu hút đầu tư", desc: "Gia tăng niềm tin của nhà đầu tư nước ngoài." }
+                ],
+                result: "Động lực tăng trưởng thương mại và đầu tư được mở rộng, nâng vị thế Việt Nam trên bản đồ kinh tế thế giới.",
+                leaders: ["Đoàn đàm phán hội nhập", "Cộng đồng doanh nghiệp"],
+                location: "Việt Nam - WTO",
+                stats: [{ label: "Mốc", value: "Gia nhập WTO" }, { label: "Tác động", value: "Toàn nền kinh tế" }]
+            },
+            "2015": {
+                label: "FTA thế hệ mới",
+                title: "2015: Tăng tốc hội nhập kinh tế sâu rộng",
+                image: "https://azfin.vn/wp-content/uploads/2023/06/3-8.png.webp",
+                context: "Giai đoạn ký kết nhiều FTA thế hệ mới, mở rộng thị trường và nâng chuẩn năng lực cạnh tranh doanh nghiệp Việt.",
+                policies: [
+                    { icon: "handshake", title: "Đàm phán FTA", desc: "Mở rộng mạng lưới đối tác kinh tế chiến lược." },
+                    { icon: "verified_user", title: "Nâng chuẩn chất lượng", desc: "Thúc đẩy tiêu chuẩn sản xuất, quản trị và lao động." },
+                    { icon: "local_shipping", title: "Thúc đẩy xuất khẩu", desc: "Tận dụng ưu đãi thuế quan và chuỗi cung ứng." },
+                    { icon: "monitoring", title: "Đổi mới quản trị", desc: "Doanh nghiệp nâng năng lực vận hành theo chuẩn quốc tế." }
+                ],
+                result: "Khả năng cạnh tranh của nền kinh tế được cải thiện, thị trường xuất khẩu đa dạng hơn.",
+                leaders: ["Khối đối ngoại kinh tế", "Hiệp hội doanh nghiệp"],
+                location: "Việt Nam - các đối tác FTA",
+                stats: [{ label: "Trọng tâm", value: "Hội nhập" }, { label: "Mức độ", value: "Sâu rộng" }]
+            },
+            "2020": {
+                label: "Thích ứng và chuyển đổi số",
+                title: "2020: Bản lĩnh Việt Nam trong biến động",
+                image: "https://vnn-imgs-f.vgcloud.vn/2021/01/11/15/doi-ngoai-viet-nam-2020-ban-linh-va-tam-the-moi-1.jpg",
+                context: "Trong bối cảnh biến động toàn cầu, Việt Nam đẩy mạnh chuyển đổi số và duy trì ổn định phát triển.",
+                policies: [
+                    { icon: "devices", title: "Số hóa dịch vụ", desc: "Mở rộng ứng dụng số trong quản lý và kinh doanh." },
+                    { icon: "shield", title: "Ổn định kinh tế", desc: "Điều hành linh hoạt để giảm tác động bất lợi." },
+                    { icon: "hub", title: "Tăng năng lực kết nối", desc: "Đẩy mạnh hạ tầng số và nền tảng dữ liệu." },
+                    { icon: "bolt", title: "Phục hồi nhanh", desc: "Tạo tiền đề cho tăng trưởng giai đoạn tiếp theo." }
+                ],
+                result: "Nền kinh tế thể hiện năng lực thích ứng tốt, thúc đẩy nhanh tiến trình chuyển đổi số quốc gia.",
+                leaders: ["Khối điều hành vĩ mô", "Doanh nghiệp công nghệ"],
+                location: "Việt Nam",
+                stats: [{ label: "Trọng tâm", value: "Chuyển đổi số" }, { label: "Tính chất", value: "Thích ứng" }]
+            },
+            "2024": {
+                label: "Tầm nhìn phát triển bền vững",
+                title: "2024: Tập trung đổi mới sáng tạo và công nghệ cao",
+                image: "https://mediafile.qdnd.vn/images/2024/10/28/cover-bai-1-2.jpg",
+                context: "Việt Nam tăng tốc các chương trình kinh tế xanh, công nghệ cao và nâng chất lượng nguồn nhân lực cho giai đoạn mới.",
+                policies: [
+                    { icon: "psychiatry", title: "Đổi mới sáng tạo", desc: "Khuyến khích phát triển hệ sinh thái công nghệ." },
+                    { icon: "energy_savings_leaf", title: "Chuyển dịch xanh", desc: "Đẩy mạnh tăng trưởng bền vững và phát thải thấp." },
+                    { icon: "groups_3", title: "Nâng chất lượng nhân lực", desc: "Tập trung đào tạo kỹ năng cho ngành giá trị cao." },
+                    { icon: "rocket_launch", title: "Nâng tầm cạnh tranh", desc: "Định vị Việt Nam ở chuỗi giá trị cao hơn." }
+                ],
+                result: "Tạo nền tảng phát triển dài hạn, cân bằng giữa tốc độ tăng trưởng và chất lượng tăng trưởng.",
+                leaders: ["Khối hoạch định chiến lược", "Doanh nghiệp đổi mới sáng tạo"],
+                location: "Việt Nam",
+                stats: [{ label: "Định hướng", value: "Xanh - Số - Công nghệ" }, { label: "Mục tiêu", value: "Dài hạn" }]
+            },
+            "2025": {
+                label: "Chu kỳ phát triển mới",
+                title: "2025: Kịch bản tăng trưởng giai đoạn tiếp theo",
+                image: "https://xdcs.cdnchinhphu.vn/446259493575335936/2026/1/5/kinh-te-viet-nam-2023-nhan-dien-thach-thuc-va-dong-luc-tang-truong-20230914154226-17573776856651412893381-1767603903980576867905.jpg",
+                context: "Giai đoạn định hình chiến lược 5 năm mới, kết hợp kinh tế số, tăng trưởng xanh và nâng cấp mô hình phát triển.",
+                policies: [
+                    { icon: "route", title: "Hoạch định chiến lược", desc: "Xây dựng kịch bản tăng trưởng theo nhiều cấp độ." },
+                    { icon: "smart_toy", title: "Ứng dụng AI", desc: "Tăng năng suất nhờ công nghệ và tự động hóa." },
+                    { icon: "account_tree", title: "Nâng cấp chuỗi giá trị", desc: "Dịch chuyển sang sản phẩm có hàm lượng tri thức cao." },
+                    { icon: "travel_explore", title: "Mở rộng vị thế", desc: "Tiếp tục nâng hạng cạnh tranh quốc gia." }
+                ],
+                result: "Định vị rõ mục tiêu phát triển mới, hướng đến tăng trưởng chất lượng cao và bền vững hơn.",
+                leaders: ["Khối chiến lược phát triển", "Hệ sinh thái doanh nghiệp"],
+                location: "Việt Nam",
+                stats: [{ label: "Tầm nhìn", value: "2025-2030" }, { label: "Động lực", value: "Số + Xanh" }]
+            }
+        };
+
+        const params = new URLSearchParams(window.location.search);
+        const phase = params.get('phase') || 'tu-lieu';
+        const data = phaseData[phase] || phaseData['tu-lieu'];
+
+        const heroBg = document.getElementById('hero-bg');
+        const eventLabel = document.getElementById('event-label');
+        const heroTitle = document.getElementById('hero-title');
+        const contextText = document.getElementById('context-text');
+        const policyGrid = document.getElementById('policy-grid');
+        const resultText = document.getElementById('result-text');
+        const leaderList = document.getElementById('leader-list');
+        const locationText = document.getElementById('location-text');
+        const statsList = document.getElementById('stats-list');
+
+        heroBg.style.backgroundImage = `linear-gradient(to bottom, rgba(22, 10, 10, 0.2), rgba(22, 10, 10, 1)), url('${data.image}')`;
+        eventLabel.textContent = data.label;
+        heroTitle.textContent = data.title;
+        contextText.textContent = data.context;
+        resultText.textContent = data.result;
+        locationText.textContent = data.location;
+
+        policyGrid.innerHTML = data.policies.map(item => `
+            <div class="bg-white/5 border border-white/10 p-5 rounded-xl flex gap-4 hover:bg-white/10 transition-colors">
+                <div class="bg-primary/20 text-primary p-3 rounded-lg h-fit">
+                    <span class="material-symbols-outlined">${item.icon}</span>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-1">${item.title}</h3>
+                    <p class="text-slate-400 text-sm">${item.desc}</p>
+                </div>
+            </div>
+        `).join('');
+
+        leaderList.innerHTML = data.leaders.map(name => `
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center border border-primary/30">
+                    <span class="material-symbols-outlined text-primary">person</span>
+                </div>
+                <div>
+                    <p class="font-bold text-sm">${name}</p>
+                    <p class="text-xs text-slate-400">Nhân vật tiêu biểu</p>
+                </div>
+            </div>
+        `).join('');
+
+        statsList.innerHTML = data.stats.map(stat => `
+            <div>
+                <div class="flex justify-between text-xs mb-1.5 font-bold">
+                    <span>${stat.label}</span>
+                    <span class="text-primary">${stat.value}</span>
+                </div>
+                <div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                    <div class="bg-primary h-full w-[88%]"></div>
+                </div>
+            </div>
+        `).join('');
+
+    </script>
+</body>
+
+</html>
