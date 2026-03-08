@@ -1,0 +1,754 @@
+﻿<!DOCTYPE html>
+
+<html class="dark" lang="vi">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700;900&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#dc1f18",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#0f0808",
+                        "accent-gold": "#d4af37",
+                    },
+                    fontFamily: {
+                        "display": ["Noto Serif", "serif"],
+                        "sans": ["Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Noto Sans', sans-serif;
+        }
+
+        .font-display {
+            font-family: 'Noto Serif', serif;
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .gradient-overlay {
+            background: linear-gradient(to top, rgba(15, 8, 8, 1) 0%, rgba(15, 8, 8, 0.4) 50%, rgba(15, 8, 8, 0.1) 100%);
+        }
+
+        .card-gradient {
+            background: linear-gradient(to top, rgba(15, 8, 8, 0.9) 0%, rgba(15, 8, 8, 0) 60%);
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+    <div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+        <!-- Header / Navigation -->
+        <header
+            class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/20 bg-background-dark/80 backdrop-blur-md px-6 md:px-10 py-3">
+            <div class="flex items-center gap-8">
+                <div class="flex items-center gap-3 text-primary">
+                    <span class="material-symbols-outlined text-3xl font-bold">movie_filter</span>
+                    <h2 class="text-white text-xl font-display font-black leading-tight tracking-tight uppercase">Việt
+                        Nam
+                        Hôm Nay </h2>
+                </div>
+            </div>
+        </header>
+        <main class="flex-1">
+            <!-- Hero Section -->
+            <section class="relative w-full h-[85vh] @container">
+                <div id="hero-background" class="absolute inset-0 bg-cover bg-center"
+                    data-alt="Cinematic wide shot of historical Vietnamese architecture"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDf0_59conUHKR4IrOH_ei2kC1NdxPFDcxfeTV6fosanXhnKxGw8m7nSKcxYPH7bE8OPF5SO2YGvPreV-QLQiJcCRoATPcFKarQItXvupGl99AdHABVboQ1VJLJh_1DgKbEPQVec0Kpyc05DJlRn9cOTs9o2Pl2g1v9VQlSXdwKWneDGk6qq1hMz6OuoLHvTZk7GI0subMtRNk917KqoowmJZI9pNH_DdhCxibmsfiwZe6JgxH-hlLohd2hNS1y0KvaXIPHGrHe_uEE");'>
+                    <div class="absolute inset-0 gradient-overlay"></div>
+                </div>
+                <div class="relative h-full flex flex-col justify-end px-6 md:px-20 pb-20 max-w-5xl">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span
+                            class="bg-primary px-3 py-1 rounded text-[10px] font-bold tracking-widest uppercase text-white">Original
+                            Series</span>
+                        <span id="hero-subtitle" class="text-accent-gold flex items-center gap-1 text-sm">
+                            <span class="material-symbols-outlined text-sm">star</span>
+                            Top #1 Hôm nay
+                        </span>
+                    </div>
+                    <h1 id="hero-title"
+                        class="font-display text-5xl md:text-8xl font-black text-white leading-[1.1] mb-6 tracking-tighter">
+                        TƯ LIỆU:<br />
+                        <span class="text-primary italic">HÀNH TRÌNH ĐỔI MỚI</span>
+                    </h1>
+                    <p id="hero-description"
+                        class="text-slate-300 text-lg md:text-xl max-w-2xl mb-8 leading-relaxed font-light">
+                        Khám phá những dấu mốc lịch sử xoay quanh công cuộc cải cách toàn diện đất nước từ năm 1986, mở
+                        ra kỷ nguyên phát triển vượt bậc của Việt Nam.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <button id="hero-watch-btn"
+                            class="flex items-center justify-center gap-2 rounded-lg h-14 px-10 bg-primary hover:bg-red-700 text-white text-lg font-bold transition-transform active:scale-95 shadow-lg shadow-primary/20">
+                            <span class="material-symbols-outlined">play_arrow</span>
+                            Xem ngay
+                        </button>
+                        <button id="hero-detail-btn"
+                            class="flex items-center justify-center gap-2 rounded-lg h-14 px-10 bg-white/10 backdrop-blur-md hover:bg-white/20 text-white text-lg font-bold border border-white/20 transition-all">
+                            <span class="material-symbols-outlined">info</span>
+                            Chi tiết
+                        </button>
+                    </div>
+                </div>
+            </section>
+            <!-- Featured Section -->
+            <section class="px-6 md:px-20 -mt-10 relative z-10">
+                <div
+                    class="bg-background-dark/60 backdrop-blur-xl border border-white/10 rounded-xl p-8 flex flex-col md:flex-row gap-8 items-center">
+                    <div
+                        class="relative w-full md:w-72 aspect-[16/9] md:aspect-[3/4] rounded-lg overflow-hidden shadow-2xl border border-primary/30 shrink-0">
+                        <img id="featured-image" class="w-full h-full object-cover"
+                            data-alt="Historical photo of the 6th National Congress of Vietnam"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAK7uELgdm1MyFN7a2n0skPQZurwcyZbpWZFw7qWEu5mjCnFhy4Sxx-bGxR_214U_opc6i2qBtiIu13HKGNtZPNd8KM-YjsWZOqW41JeboKZ4TzP2Ga1ZKDuYQqQjPllvDerd1dwqyKpR6bVebPdMSEOTisJhCRVIvOvRoIF2sk24FIQ3mxslggSs0cs-sU7rX4uDEQrV-5uC2y0mA9D8jvcxhDAKtWh6irM-OQXMlZEaR-vDdn1snOZg-hnQH7xUAHdYpTXv7Gw6Rv" />
+                        <!-- <div
+                            class="absolute inset-0 bg-primary/20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                            <span class="material-symbols-outlined text-white text-5xl">play_circle</span>
+                        </div> -->
+                    </div>
+                    <div class="flex-1">
+                        <h4 id="featured-kicker" class="text-primary font-bold tracking-widest uppercase text-xs mb-2">
+                            Đang trình chiếu: Tư liệu</h4>
+                        <h2 id="featured-title" class="font-display text-3xl font-black text-white mb-4">Hành trình
+                            Đổi mới</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                            <div class="space-y-1">
+                                <span class="text-accent-gold text-xs font-bold uppercase block">Chính sách</span>
+                                <p id="featured-policy" class="text-slate-300 text-sm">Tổng hợp định hướng cải cách, mở
+                                    cửa và hội nhập theo từng giai đoạn.</p>
+                            </div>
+                            <div class="space-y-1">
+                                <span class="text-accent-gold text-xs font-bold uppercase block">Hoạt động</span>
+                                <p id="featured-activity" class="text-slate-300 text-sm">Kết nối các mốc lịch sử, chính
+                                    sách trọng điểm và chuyển biến kinh tế - xã hội.</p>
+                            </div>
+                            <div class="space-y-1">
+                                <span class="text-accent-gold text-xs font-bold uppercase block">Kết quả</span>
+                                <p id="featured-result" class="text-slate-300 text-sm">Giúp theo dõi toàn cảnh hành
+                                    trình Đổi mới một cách trực quan và liền mạch.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="flex -space-x-2">
+                                <div
+                                    class="w-8 h-8 rounded-full border-2 border-background-dark bg-slate-700 flex items-center justify-center text-[10px] font-bold">
+                                    LS</div>
+                                <div
+                                    class="w-8 h-8 rounded-full border-2 border-background-dark bg-primary flex items-center justify-center text-[10px] font-bold">
+                                    DM</div>
+                                <div
+                                    class="w-8 h-8 rounded-full border-2 border-background-dark bg-accent-gold flex items-center justify-center text-[10px] font-bold text-black">
+                                    +5</div>
+                            </div>
+                            <span class="text-slate-400 text-xs italic">Xem cùng cộng đồng nghiên cứu lịch sử</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Milestones Horizontal Scroll -->
+            <section class="py-16">
+                <div class="px-6 md:px-20 flex justify-between items-end mb-8">
+                    <div>
+                        <h3 class="text-white font-display text-2xl font-bold">Các Cột Mốc Lịch Sử</h3>
+                        <p class="text-slate-400 text-sm">Duyệt theo dòng thời gian của tiến trình phát triển</p>
+                    </div>
+                </div>
+                <div class="flex gap-6 overflow-x-auto px-6 md:px-20 hide-scrollbar pb-10">
+                    <!-- Tư liệu -->
+                    <div class="min-w-[280px] group cursor-pointer milestone-card is-active" data-year="tu-lieu"
+                        data-display="Tư liệu">
+                        <div
+                            class="milestone-card-inner relative aspect-[2/3] rounded-xl overflow-hidden shadow-lg transition-transform duration-300 group-hover:scale-105 border border-white/5 group-hover:border-primary/50">
+                            <img class="w-full h-full object-cover" data-alt="Tư liệu: Hành trình Đổi mới"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDf0_59conUHKR4IrOH_ei2kC1NdxPFDcxfeTV6fosanXhnKxGw8m7nSKcxYPH7bE8OPF5SO2YGvPreV-QLQiJcCRoATPcFKarQItXvupGl99AdHABVboQ1VJLJh_1DgKbEPQVec0Kpyc05DJlRn9cOTs9o2Pl2g1v9VQlSXdwKWneDGk6qq1hMz6OuoLHvTZk7GI0subMtRNk917KqoowmJZI9pNH_DdhCxibmsfiwZe6JgxH-hlLohd2hNS1y0KvaXIPHGrHe_uEE" />
+                            <div class="absolute inset-0 card-gradient"></div>
+                            <div class="absolute bottom-0 p-5 w-full">
+                                <span class="text-primary font-black text-3xl mb-1 block">TƯ LIỆU</span>
+                                <h4 class="text-white font-bold text-lg leading-tight">Hành trình Đổi mới</h4>
+                                <div
+                                    class="mt-4 h-0 overflow-hidden group-hover:h-auto transition-all duration-500 opacity-0 group-hover:opacity-100">
+                                    <p class="text-slate-300 text-xs line-clamp-2">Tổng quan các dấu mốc nổi bật từ 1986
+                                        đến nay.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 1986 -->
+                    <div class="min-w-[280px] group cursor-pointer milestone-card" data-year="1986">
+                        <div
+                            class="milestone-card-inner relative aspect-[2/3] rounded-xl overflow-hidden shadow-lg transition-transform duration-300 group-hover:scale-105 border border-primary/50">
+                            <img class="w-full h-full object-cover" data-alt="6th National Congress of Vietnam"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAK7uELgdm1MyFN7a2n0skPQZurwcyZbpWZFw7qWEu5mjCnFhy4Sxx-bGxR_214U_opc6i2qBtiIu13HKGNtZPNd8KM-YjsWZOqW41JeboKZ4TzP2Ga1ZKDuYQqQjPllvDerd1dwqyKpR6bVebPdMSEOTisJhCRVIvOvRoIF2sk24FIQ3mxslggSs0cs-sU7rX4uDEQrV-5uC2y0mA9D8jvcxhDAKtWh6irM-OQXMlZEaR-vDdn1snOZg-hnQH7xUAHdYpTXv7Gw6Rv" />
+                            <div class="absolute inset-0 card-gradient"></div>
+                            <div class="absolute bottom-0 p-5 w-full">
+                                <span class="text-primary font-black text-3xl mb-1 block">1986</span>
+                                <h4 class="text-white font-bold text-lg leading-tight">Đại hội VI - Khởi xướng Đổi mới
+                                </h4>
+                                <div
+                                    class="mt-4 h-0 overflow-hidden group-hover:h-auto transition-all duration-500 opacity-0 group-hover:opacity-100">
+                                    <p class="text-slate-300 text-xs line-clamp-2">Khởi đầu tiến trình cải cách toàn
+                                        diện kinh tế - xã hội.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 1988 -->
+                    <div class="min-w-[280px] group cursor-pointer milestone-card" data-year="1988">
+                        <div
+                            class="relative aspect-[2/3] rounded-xl overflow-hidden shadow-lg transition-transform duration-300 group-hover:scale-105 border border-white/5 group-hover:border-primary/50">
+                            <img class="w-full h-full object-cover" data-alt="Agricultural development in 1980s Vietnam"
+                                src="https://phaply.net.vn/uploads/images/2023/09/28/2-1695878078.jpg" />
+                            <div class="absolute inset-0 card-gradient"></div>
+                            <div class="absolute bottom-0 p-5 w-full">
+                                <span class="text-primary font-black text-3xl mb-1 block">1988</span>
+                                <h4 class="text-white font-bold text-lg leading-tight">Luật Đầu Tư Nước Ngoài</h4>
+                                <div
+                                    class="mt-4 h-0 overflow-hidden group-hover:h-auto transition-all duration-500 opacity-0 group-hover:opacity-100">
+                                    <p class="text-slate-300 text-xs line-clamp-2">Khơi thông FDI, thúc đẩy cả nông
+                                        nghiệp lẫn công nghiệp phát triển.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 1993 -->
+                    <div class="min-w-[280px] group cursor-pointer milestone-card" data-year="1993">
+                        <div
+                            class="relative aspect-[2/3] rounded-xl overflow-hidden shadow-lg transition-transform duration-300 group-hover:scale-105 border border-white/5 group-hover:border-primary/50">
+                            <img class="w-full h-full object-cover"
+                                data-alt="Vietnam countryside landscape representing growth"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCezkGNoUXbsdeX-IuQTlsbYr2CQ7Isqm7ObwI1xKxdVi_myBJRhaEQjeSjkPIIK4xTrwLbNcz1gl5eVXxlytnhOBeY1cbCiSC268tPrE7LnTUjataXHrBpYBPqI7Mk7PjPhCbw0pUtrw-Bfk7yZYpFwBVxwe21Rwi8S34jRZCgtLVbxS-mAF09ncVgTNo3tz_TLb-fbjjdGHnRZkeyjqwQcu7nk2SzJ80LgothKS0fTviO9WwNm61sUQnzppl4wo4S38H-507hOM5J" />
+                            <div class="absolute inset-0 card-gradient"></div>
+                            <div class="absolute bottom-0 p-5 w-full">
+                                <span class="text-primary font-black text-3xl mb-1 block">1993</span>
+                                <h4 class="text-white font-bold text-lg leading-tight">Luật Đất Đai Mới</h4>
+                                <div
+                                    class="mt-4 h-0 overflow-hidden group-hover:h-auto transition-all duration-500 opacity-0 group-hover:opacity-100">
+                                    <p class="text-slate-300 text-xs line-clamp-2">Công nhận quyền sử dụng đất, thúc đẩy
+                                        nông nghiệp.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 1996 -->
+                    <div class="min-w-[280px] group cursor-pointer milestone-card" data-year="1996">
+                        <div
+                            class="relative aspect-[2/3] rounded-xl overflow-hidden shadow-lg transition-transform duration-300 group-hover:scale-105 border border-white/5 group-hover:border-primary/50">
+                            <img class="w-full h-full object-cover" data-alt="Modernizing infrastructure in 1990s"
+                                src="https://hoc24.vn/source/%C4%90%E1%BB%8BaTHCS/%40%40/HCM-713623-03.jpg" />
+                            <div class="absolute inset-0 card-gradient"></div>
+                            <div class="absolute bottom-0 p-5 w-full">
+                                <span class="text-primary font-black text-3xl mb-1 block">1996</span>
+                                <h4 class="text-white font-bold text-lg leading-tight">Công Nghiệp Hóa</h4>
+                                <div
+                                    class="mt-4 h-0 overflow-hidden group-hover:h-auto transition-all duration-500 opacity-0 group-hover:opacity-100">
+                                    <p class="text-slate-300 text-xs line-clamp-2">Đại hội VIII: Đẩy mạnh hiện đại hóa
+                                        đất nước.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 2007 -->
+                    <div class="min-w-[280px] group cursor-pointer milestone-card" data-year="2007">
+                        <div
+                            class="relative aspect-[2/3] rounded-xl overflow-hidden shadow-lg transition-transform duration-300 group-hover:scale-105 border border-white/5 group-hover:border-primary/50">
+                            <img class="w-full h-full object-cover"
+                                data-alt="Hanoi skyline at night representing WTO entry"
+                                src="https://file.hstatic.net/1000197644/article/5_5e4e60ed411148ebacb6355d43ccc6b2_1024x1024.jpg" />
+                            <div class="absolute inset-0 card-gradient"></div>
+                            <div class="absolute bottom-0 p-5 w-full">
+                                <span class="text-primary font-black text-3xl mb-1 block">2007</span>
+                                <h4 class="text-white font-bold text-lg leading-tight">Vươn Ra Biển Lớn</h4>
+                                <div
+                                    class="mt-4 h-0 overflow-hidden group-hover:h-auto transition-all duration-500 opacity-0 group-hover:opacity-100">
+                                    <p class="text-slate-300 text-xs line-clamp-2">Gia nhập WTO, hội nhập sâu rộng kinh
+                                        tế toàn cầu.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 2015 -->
+                    <div class="min-w-[280px] group cursor-pointer milestone-card" data-year="2015">
+                        <div
+                            class="relative aspect-[2/3] rounded-xl overflow-hidden shadow-lg transition-transform duration-300 group-hover:scale-105 border border-white/5 group-hover:border-primary/50">
+                            <img class="w-full h-full object-cover" data-alt="Modern high-tech factory in Vietnam"
+                                src="https://azfin.vn/wp-content/uploads/2023/06/2-8.png.webp" />
+                            <div class="absolute inset-0 card-gradient"></div>
+                            <div class="absolute bottom-0 p-5 w-full">
+                                <span class="text-primary font-black text-3xl mb-1 block">2015</span>
+                                <h4 class="text-white font-bold text-lg leading-tight">Kinh Tế Số &amp; FTAs</h4>
+                                <div
+                                    class="mt-4 h-0 overflow-hidden group-hover:h-auto transition-all duration-500 opacity-0 group-hover:opacity-100">
+                                    <p class="text-slate-300 text-xs line-clamp-2">Ký kết các hiệp định thương mại tự do
+                                        thế hệ mới.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 2020 -->
+                    <div class="min-w-[280px] group cursor-pointer milestone-card" data-year="2020">
+                        <div
+                            class="relative aspect-[2/3] rounded-xl overflow-hidden shadow-lg transition-transform duration-300 group-hover:scale-105 border border-white/5 group-hover:border-primary/50">
+                            <img class="w-full h-full object-cover" data-alt="Digital transformation concept image"
+                                src="https://vnn-imgs-f.vgcloud.vn/2021/01/11/15/doi-ngoai-viet-nam-2020-ban-linh-va-tam-the-moi.jpg" />
+                            <div class="absolute inset-0 card-gradient"></div>
+                            <div class="absolute bottom-0 p-5 w-full">
+                                <span class="text-primary font-black text-3xl mb-1 block">2020</span>
+                                <h4 class="text-white font-bold text-lg leading-tight">Bản Lĩnh Việt Nam</h4>
+                                <div
+                                    class="mt-4 h-0 overflow-hidden group-hover:h-auto transition-all duration-500 opacity-0 group-hover:opacity-100">
+                                    <p class="text-slate-300 text-xs line-clamp-2">Thích ứng linh hoạt, chuyển đổi số
+                                        toàn diện.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 2024 -->
+                    <div class="min-w-[280px] group cursor-pointer milestone-card" data-year="2024">
+                        <div
+                            class="relative aspect-[2/3] rounded-xl overflow-hidden shadow-lg transition-transform duration-300 group-hover:scale-105 border border-white/5 group-hover:border-primary/50">
+                            <img class="w-full h-full object-cover" data-alt="Modern Vietnamese city at twilight"
+                                src="2024.jpg" />
+                            <div class="absolute inset-0 card-gradient"></div>
+                            <div class="absolute bottom-0 p-5 w-full">
+                                <span class="text-primary font-black text-3xl mb-1 block">2024</span>
+                                <h4 class="text-white font-bold text-lg leading-tight">Tầm Nhìn Chiến Lược</h4>
+                                <div
+                                    class="mt-4 h-0 overflow-hidden group-hover:h-auto transition-all duration-500 opacity-0 group-hover:opacity-100">
+                                    <p class="text-slate-300 text-xs line-clamp-2">Tập trung vào phát triển bền vững và
+                                        công nghệ cao.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- 2025 -->
+                    <div class="min-w-[280px] group cursor-pointer milestone-card" data-year="2025">
+                        <div
+                            class="relative aspect-[2/3] rounded-xl overflow-hidden shadow-lg transition-transform duration-300 group-hover:scale-105 border border-white/5 group-hover:border-primary/50">
+                            <img class="w-full h-full object-cover" data-alt="High-tech glowing digital connections"
+                                src="https://xdcs.cdnchinhphu.vn/446259493575335936/2026/1/5/tangtruong-17676045594171541229794.jpeg" />
+                            <div
+                                class="absolute top-4 right-4 bg-primary px-3 py-1 rounded text-[10px] font-black uppercase text-white shadow-lg z-20">
+                                MỚI</div>
+                            <div class="absolute inset-0 card-gradient"></div>
+                            <div class="absolute bottom-0 p-5 w-full">
+                                <span class="text-primary font-black text-3xl mb-1 block">2025</span>
+                                <h4 class="text-white font-bold text-lg leading-tight">Kỳ Tích Tiếp Theo</h4>
+                                <div
+                                    class="mt-4 h-0 overflow-hidden group-hover:h-auto transition-all duration-500 opacity-0 group-hover:opacity-100">
+                                    <p class="text-slate-300 text-xs line-clamp-2">Kịch bản phát triển cho giai đoạn 5
+                                        năm tiếp theo.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Categorized View -->
+            <section class="px-6 md:px-20 py-10 border-t border-white/5">
+                <div class="mb-8">
+                    <h3 class="text-white font-display text-2xl font-bold">Cột mốc mới</h3>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"><!-- 2026 Prediction -->
+                    <div
+                        class="relative group rounded-xl overflow-hidden bg-white/5 border border-white/10 p-4 transition-all hover:bg-white/10">
+                        <div class="aspect-video rounded-lg overflow-hidden mb-4 relative">
+                            <img class="w-full h-full object-cover" data-alt="Futuristic city visualization 2030"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWKbAdtCkB0qL9n29XiQnwdLVPAH7_hABKKt-kEAwC6XQG_mjliLdIhMwez1kCOn0NrKsNQjOS0y65PdP6SnCk7npZGZWpLwVxPlA3za3Rffd2U7yOjrsWUztZc5fJvTlv-1bN8QQwwIq7iE1HYuO0QfG_2HREsjiPalR2YVSTMg-81ChgPB_MjAXpMMCnYKLOyIx9z6h5LUrfNhkRt26VtSeQavwBQGkXUW6jiEczdqfuiBbg87OkwRmxC034APSI8k6wZDh6Lwl_" />
+                            <div
+                                class="absolute top-2 left-2 bg-accent-gold text-black px-2 py-1 rounded text-[10px] font-black uppercase">
+                                SẮP TỚI</div>
+                        </div>
+                        <h5 class="text-white font-bold text-lg mb-1">2026: Tầm nhìn 2030 &amp; 2045</h5>
+                        <p class="text-slate-400 text-xs mb-3">Phát họa bản đồ phát triển dài hạn vươn tầm thế giới.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-500 text-xs">Dự kiến: ???/2026</span>
+                            <span class="material-symbols-outlined text-slate-500">schedule</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <div id="phase-modal" class="fixed inset-0 z-[100] hidden">
+        <div id="phase-modal-backdrop" class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+        <div id="phase-modal-shell" class="relative z-[101] h-full w-full flex items-center justify-center p-3 md:p-6">
+            <div
+                class="relative w-full max-w-6xl h-[92vh] rounded-xl overflow-hidden border border-white/20 bg-background-dark shadow-2xl">
+                <iframe id="phase-modal-frame" class="w-full h-full border-0" src="about:blank"
+                    title="Chi tiết giai đoạn"></iframe>
+            </div>
+        </div>
+    </div>
+    <div id="video-modal" class="fixed inset-0 z-[110] hidden">
+        <div id="video-modal-backdrop" class="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+        <div id="video-modal-shell" class="relative z-[111] h-full w-full flex items-center justify-center p-3 md:p-6">
+            <div
+                class="relative w-full max-w-5xl aspect-video rounded-xl overflow-hidden border border-white/20 bg-black shadow-2xl">
+                <iframe id="video-modal-frame" class="w-full h-full border-0" src="about:blank"
+                    title="Video theo cột mốc" allow="autoplay; encrypted-media; picture-in-picture"
+                    allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Cau hinh anh HERO theo tung the. Chi can thay link trong block nay.
+        // Key hop le: "tu-lieu", "1986", "1988", "1993", "1996", "2007", "2015", "2020", "2024", "2025"
+        const heroImageByKey = {
+            "tu-lieu": "https://vanhoathoidai.vn/uploads/images/blog/huyhoang/2025/07/20/z6823925834733-ebdf9d8ffc5bbc6349b22391bb827933-1753019646.jpg",
+            "1986": "https://petrovietnam.petrotimes.vn/stores/news_dataimages/nguyenphuong/102021/27/19/in_article/0335_dang-cong-san-viet-nam---niem-tin-niem-tu-hao-cua-dan-toc-viet-nam-1-164250.jpg?rt=20211027190336",
+            "1988": "https://petrovietnam.petrotimes.vn/stores/news_dataimages/nguyenphuong/102021/27/17/in_article/2809_Untitled.jpg?rt=20211027172812",
+            "1993": "https://th.bing.com/th/id/R.eb8dd5a8d36fc0b46b6afcc5ff6108a3?rik=A2xRxze6rO9XXQ&pid=ImgRaw&r=0",
+            "1996": "https://img.loigiaihay.com/picture/article/2015/0823/ch20-0.jpg",
+            "2007": "https://phunuvietnam.mediacdn.vn/179072216278405120/2023/12/25/anh-ngoc-khoi-17035121491081711497012.jpg",
+            "2015": "https://azfin.vn/wp-content/uploads/2023/06/3-8.png.webp",
+            "2020": "https://vnn-imgs-f.vgcloud.vn/2021/01/11/15/doi-ngoai-viet-nam-2020-ban-linh-va-tam-the-moi-1.jpg",
+            "2024": "https://mediafile.qdnd.vn/images/2024/10/28/cover-bai-1-2.jpg",
+            "2025": "https://xdcs.cdnchinhphu.vn/446259493575335936/2026/1/5/kinh-te-viet-nam-2023-nhan-dien-thach-thuc-va-dong-luc-tang-truong-20230914154226-17573776856651412893381-1767603903980576867905.jpg"
+        };
+
+        // Mapping video
+        const videoByKey = {
+            "tu-lieu": "https://www.youtube.com/watch?v=VK6PsKXHMa0",
+            "1986": "https://www.youtube.com/watch?v=xFHawdU99KQ",
+            "1988": "https://www.youtube.com/watch?v=TSMAmzUQ0DQ",
+            "1993": "",
+            "1996": "https://www.youtube.com/watch?v=wKCu-AKzuWc",
+            "2007": "",
+            "2015": "https://www.youtube.com/watch?v=vyN2ncsD_ik",
+            "2020": "https://www.youtube.com/watch?v=1zfd3z6e8as",
+            "2024": "https://www.youtube.com/watch?v=AGFggee9EhU",
+            "2025": "https://www.youtube.com/watch?v=sdjMqIbT55A"
+        };
+
+        // Mapping detail
+        const detailPageByKey = {
+            "tu-lieu": "popup_detail_phases.html?phase=tu-lieu",
+            "1986": "popup_detail_phases.html?phase=1986",
+            "1988": "popup_detail_phases.html?phase=1988",
+            "1993": "popup_detail_phases.html?phase=1993",
+            "1996": "popup_detail_phases.html?phase=1996",
+            "2007": "popup_detail_phases.html?phase=2007",
+            "2015": "popup_detail_phases.html?phase=2015",
+            "2020": "popup_detail_phases.html?phase=2020",
+            "2024": "popup_detail_phases.html?phase=2024",
+            "2025": "popup_detail_phases.html?phase=2025"
+        };
+
+        const milestoneDetails = {
+            "tu-lieu": {
+                policy: "Tổng hợp định hướng cải cách, mở cửa và hội nhập theo từng giai đoạn.",
+                activity: "Kết nối các mốc lịch sử, chính sách trọng điểm và chuyển biến kinh tế - xã hội.",
+                result: "Giúp theo dõi toàn cảnh hành trình Đổi mới một cách trực quan và liền mạch."
+            },
+            "1986": {
+                policy: "Xóa bỏ cơ chế tập trung, phát triển kinh tế nhiều thành phần.",
+                activity: "Tập trung sản xuất lương thực, hàng tiêu dùng và hàng xuất khẩu.",
+                result: "Chấm dứt khủng hoảng, mở đầu cho sự khởi sắc của đất nước."
+            },
+            "1988": {
+                policy: "Đẩy mạnh cải cách mở cửa, đồng thời hỗ trợ sản xuất nông nghiệp và đặt nền cho công nghiệp hóa.",
+                activity: "Triển khai Luật Đầu tư Nước ngoài, thu hút hợp tác cho nông nghiệp, công nghiệp chế biến và hạ tầng sản xuất.",
+                result: "FDI tăng lên, sản xuất phục hồi trên diện rộng, tạo đà chuyển dịch từ nông nghiệp sang công nghiệp."
+            },
+            "1993": {
+                policy: "Công nhận quyền sử dụng đất và hoàn thiện khung pháp lý đất đai.",
+                activity: "Mở rộng quyền giao dịch đất, thúc đẩy sản xuất và tích lũy trong dân.",
+                result: "Nông nghiệp tăng tốc, đời sống nông thôn cải thiện rõ rệt."
+            },
+            "1996": {
+                policy: "Đẩy mạnh công nghiệp hóa, hiện đại hóa trên quy mô quốc gia.",
+                activity: "Ưu tiên phát triển hạ tầng, công nghiệp chế biến và khu công nghiệp.",
+                result: "Năng lực sản xuất tăng, cơ cấu kinh tế chuyển dịch mạnh sang công nghiệp."
+            },
+            "2007": {
+                policy: "Tăng cường hội nhập thể chế theo tiêu chuẩn kinh tế toàn cầu.",
+                activity: "Gia nhập WTO và mở rộng thị trường xuất nhập khẩu.",
+                result: "Thương mại bứt phá, doanh nghiệp Việt Nam tham gia sâu hơn chuỗi giá trị."
+            },
+            "2015": {
+                policy: "Thúc đẩy hội nhập bằng các FTA thế hệ mới.",
+                activity: "Đàm phán và ký kết loạt hiệp định thương mại tự do quan trọng.",
+                result: "Mở rộng thị trường xuất khẩu, nâng chuẩn cạnh tranh quốc gia."
+            },
+            "2020": {
+                policy: "Ưu tiên phục hồi bền vững gắn với chương trình chuyển đổi số.",
+                activity: "Mở rộng dịch vụ số, thương mại điện tử và quản trị số trong nhiều lĩnh vực.",
+                result: "Tăng khả năng thích ứng, duy trì đà phát triển trong bối cảnh biến động."
+            },
+            "2024": {
+                policy: "Tập trung phát triển bền vững, công nghệ cao và đổi mới sáng tạo.",
+                activity: "Đầu tư vào chuyển dịch xanh, hạ tầng số và nhân lực chất lượng cao.",
+                result: "Nền tảng tăng trưởng dài hạn được củng cố, hướng tới giá trị cao hơn."
+            },
+            "2025": {
+                policy: "Chuẩn bị chiến lược tăng trưởng cho chu kỳ phát triển mới.",
+                activity: "Hoạch định kịch bản 5 năm tiếp theo gắn với kinh tế số và xanh.",
+                result: "Định vị tầm nhìn phát triển mới, tăng tốc hội nhập và nâng hạng nền kinh tế."
+            }
+        };
+
+        const cards = Array.from(document.querySelectorAll('.milestone-card'));
+        const featuredImage = document.getElementById('featured-image');
+        const featuredKicker = document.getElementById('featured-kicker');
+        const featuredTitle = document.getElementById('featured-title');
+        const featuredPolicy = document.getElementById('featured-policy');
+        const featuredActivity = document.getElementById('featured-activity');
+        const featuredResult = document.getElementById('featured-result');
+        const heroBackground = document.getElementById('hero-background');
+        const heroTitle = document.getElementById('hero-title');
+        const heroDescription = document.getElementById('hero-description');
+        const heroSubtitle = document.getElementById('hero-subtitle');
+        const heroWatchBtn = document.getElementById('hero-watch-btn');
+        const heroDetailBtn = document.getElementById('hero-detail-btn');
+        const phaseModal = document.getElementById('phase-modal');
+        const phaseModalBackdrop = document.getElementById('phase-modal-backdrop');
+        const phaseModalShell = document.getElementById('phase-modal-shell');
+        const phaseModalFrame = document.getElementById('phase-modal-frame');
+        const videoModal = document.getElementById('video-modal');
+        const videoModalBackdrop = document.getElementById('video-modal-backdrop');
+        const videoModalShell = document.getElementById('video-modal-shell');
+        const videoModalFrame = document.getElementById('video-modal-frame');
+
+        const setActiveCard = (activeCard) => {
+            cards.forEach((card) => {
+                const inner = card.querySelector('.milestone-card-inner') || card.firstElementChild;
+                card.classList.remove('is-active');
+                if (inner) {
+                    inner.classList.remove('border-primary/50');
+                    inner.classList.add('border-white/5');
+                }
+            });
+
+            const activeInner = activeCard.querySelector('.milestone-card-inner') || activeCard.firstElementChild;
+            activeCard.classList.add('is-active');
+            if (activeInner) {
+                activeInner.classList.remove('border-white/5');
+                activeInner.classList.add('border-primary/50');
+            }
+        };
+
+        const updateFeatured = (card) => {
+            const year = card.dataset.year || '';
+            const display = card.dataset.display || year;
+            const titleNode = card.querySelector('h4');
+            const imageNode = card.querySelector('img');
+            const details = milestoneDetails[year] || {};
+
+            if (featuredImage && imageNode) {
+                featuredImage.src = imageNode.src;
+                featuredImage.alt = imageNode.getAttribute('data-alt') || titleNode?.textContent?.trim() || '';
+            }
+
+            if (featuredKicker) {
+                featuredKicker.textContent = `Đang trình chiếu: ${display}`;
+            }
+
+            if (featuredTitle && titleNode) {
+                const cleanTitle = titleNode.textContent.trim();
+                featuredTitle.textContent = /^\d/.test(year) && !cleanTitle.startsWith(year) ? `${year}: ${cleanTitle}` : cleanTitle;
+            }
+
+            if (featuredPolicy) {
+                featuredPolicy.textContent = details.policy || featuredPolicy.textContent;
+            }
+
+            if (featuredActivity) {
+                featuredActivity.textContent = details.activity || featuredActivity.textContent;
+            }
+
+            if (featuredResult) {
+                featuredResult.textContent = details.result || featuredResult.textContent;
+            }
+
+            if (heroBackground && imageNode) {
+                const customHeroImage = heroImageByKey[year];
+                const nextHeroImage = customHeroImage && customHeroImage.trim() ? customHeroImage.trim() : imageNode.src;
+                heroBackground.style.backgroundImage = `url("${nextHeroImage}")`;
+            }
+
+            if (heroSubtitle) {
+                heroSubtitle.innerHTML = '<span class="material-symbols-outlined text-sm">star</span>' + `Nổi bật: ${display}`;
+            }
+
+            if (heroTitle && titleNode) {
+                const cleanTitle = titleNode.textContent.trim();
+                const heroPrefix = /^\d/.test(year) ? `CỘT MỐC ${year}:` : "TƯ LIỆU:";
+                heroTitle.innerHTML = `${heroPrefix}<br /><span class="text-primary italic">${cleanTitle.toUpperCase()}</span>`;
+            }
+
+            if (heroDescription) {
+                heroDescription.textContent = details.result || details.activity || heroDescription.textContent;
+            }
+
+            if (heroDetailBtn) {
+                const mappedUrl = detailPageByKey[year] || `popup_detail_phases.html?phase=${encodeURIComponent(year)}`;
+                heroDetailBtn.dataset.href = mappedUrl;
+            }
+
+            if (heroWatchBtn) {
+                const mappedVideoUrl = videoByKey[year] || "";
+                heroWatchBtn.dataset.href = mappedVideoUrl;
+                heroWatchBtn.dataset.year = year;
+            }
+        };
+
+        const openPhaseModal = (targetUrl) => {
+            if (!phaseModal || !phaseModalFrame) return;
+            phaseModalFrame.src = targetUrl || "popup_detail_phases.html";
+            phaseModal.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        };
+
+        const closePhaseModal = () => {
+            if (!phaseModal || !phaseModalFrame) return;
+            phaseModal.classList.add('hidden');
+            phaseModalFrame.src = "about:blank";
+            document.body.classList.remove('overflow-hidden');
+        };
+
+        const openVideoModal = (targetUrl) => {
+            if (!videoModal || !videoModalFrame) return;
+            videoModalFrame.src = normalizeVideoUrl(targetUrl);
+            videoModal.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        };
+
+        const closeVideoModal = () => {
+            if (!videoModal || !videoModalFrame) return;
+            videoModal.classList.add('hidden');
+            videoModalFrame.src = "about:blank";
+            document.body.classList.remove('overflow-hidden');
+        };
+
+        const normalizeVideoUrl = (rawUrl) => {
+            const urlText = (rawUrl || "").trim();
+            if (!urlText) return "";
+
+            try {
+                const url = new URL(urlText.startsWith("http") ? urlText : `https://${urlText}`);
+                const host = url.hostname.replace(/^www\./, "");
+
+                if (host === "youtube.com" || host === "m.youtube.com" || host === "youtu.be") {
+                    if (url.pathname.startsWith("/embed/")) {
+                        return url.toString();
+                    }
+
+                    let videoId = "";
+
+                    if (host === "youtu.be") {
+                        videoId = url.pathname.replace("/", "").trim();
+                    } else {
+                        videoId = url.searchParams.get("v") || "";
+                    }
+
+                    if (videoId) {
+                        return `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1`;
+                    }
+                }
+
+                return url.toString();
+            } catch (_) {
+                return urlText;
+            }
+        };
+
+        if (heroDetailBtn) {
+            heroDetailBtn.addEventListener('click', () => {
+                const targetUrl = heroDetailBtn.dataset.href || "popup_detail_phases.html";
+                openPhaseModal(targetUrl);
+            });
+        }
+
+        if (heroWatchBtn) {
+            heroWatchBtn.addEventListener('click', () => {
+                const targetUrl = (heroWatchBtn.dataset.href || "").trim();
+                if (!targetUrl) {
+                    alert(`Chưa gắn link video cho mốc ${heroWatchBtn.dataset.year || ""}.`);
+                    return;
+                }
+                openVideoModal(targetUrl);
+            });
+        }
+
+        if (phaseModalBackdrop) {
+            phaseModalBackdrop.addEventListener('click', closePhaseModal);
+        }
+
+        if (phaseModalShell) {
+            phaseModalShell.addEventListener('click', (event) => {
+                if (event.target === phaseModalShell) {
+                    closePhaseModal();
+                }
+            });
+        }
+
+        if (videoModalBackdrop) {
+            videoModalBackdrop.addEventListener('click', closeVideoModal);
+        }
+
+        if (videoModalShell) {
+            videoModalShell.addEventListener('click', (event) => {
+                if (event.target === videoModalShell) {
+                    closeVideoModal();
+                }
+            });
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                if (videoModal && !videoModal.classList.contains('hidden')) {
+                    closeVideoModal();
+                } else if (phaseModal && !phaseModal.classList.contains('hidden')) {
+                    closePhaseModal();
+                }
+            }
+        });
+
+        window.addEventListener('message', (event) => {
+            if (event.data && event.data.type === 'closePhaseModal') {
+                closePhaseModal();
+            }
+        });
+
+        cards.forEach((card) => {
+            card.addEventListener('click', () => {
+                setActiveCard(card);
+                updateFeatured(card);
+            });
+        });
+
+        const initialCard = cards.find((card) => card.dataset.year === "tu-lieu") || cards[0];
+        if (initialCard) {
+            setActiveCard(initialCard);
+            updateFeatured(initialCard);
+        }
+    </script>
+</body>
+
+</html>
