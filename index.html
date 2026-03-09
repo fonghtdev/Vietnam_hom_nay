@@ -96,7 +96,7 @@
                         </span>
                     </div>
                     <h1 id="hero-title"
-                        class="font-display text-5xl md:text-8xl font-black text-white leading-[1.1] mb-6 tracking-tighter">
+                        class="font-display text-4xl md:text-6xl font-black text-white leading-[1.1] mb-6 tracking-tighter">
                         TƯ LIỆU:<br />
                         <span class="text-primary italic">HÀNH TRÌNH ĐỔI MỚI</span>
                     </h1>
@@ -179,8 +179,20 @@
                         <h3 class="text-white font-display text-2xl font-bold">Các Cột Mốc Lịch Sử</h3>
                         <p class="text-slate-400 text-sm">Duyệt theo dòng thời gian của tiến trình phát triển</p>
                     </div>
+                    <div class="flex items-center gap-2">
+                        <button id="milestone-prev-btn"
+                            class="h-14 w-14 md:h-16 md:w-16 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white flex items-center justify-center transition disabled:opacity-40 disabled:cursor-not-allowed"
+                            aria-label="Mốc trước">
+                            <span class="material-symbols-outlined text-2xl md:text-3xl">arrow_back</span>
+                        </button>
+                        <button id="milestone-next-btn"
+                            class="h-14 w-14 md:h-16 md:w-16 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white flex items-center justify-center transition disabled:opacity-40 disabled:cursor-not-allowed"
+                            aria-label="Mốc tiếp theo">
+                            <span class="material-symbols-outlined text-2xl md:text-3xl">arrow_forward</span>
+                        </button>
+                    </div>
                 </div>
-                <div class="flex gap-6 overflow-x-auto px-6 md:px-20 hide-scrollbar pb-10">
+                <div id="milestone-track" class="flex gap-6 overflow-x-auto px-6 md:px-20 hide-scrollbar pb-10">
                     <!-- Tư liệu -->
                     <div class="min-w-[280px] group cursor-pointer milestone-card is-active" data-year="tu-lieu"
                         data-display="Tư liệu">
@@ -526,6 +538,9 @@
         const heroSubtitle = document.getElementById('hero-subtitle');
         const heroWatchBtn = document.getElementById('hero-watch-btn');
         const heroDetailBtn = document.getElementById('hero-detail-btn');
+        const milestoneTrack = document.getElementById('milestone-track');
+        const milestonePrevBtn = document.getElementById('milestone-prev-btn');
+        const milestoneNextBtn = document.getElementById('milestone-next-btn');
         const phaseModal = document.getElementById('phase-modal');
         const phaseModalBackdrop = document.getElementById('phase-modal-backdrop');
         const phaseModalShell = document.getElementById('phase-modal-shell');
@@ -534,22 +549,89 @@
         const videoModalBackdrop = document.getElementById('video-modal-backdrop');
         const videoModalShell = document.getElementById('video-modal-shell');
         const videoModalFrame = document.getElementById('video-modal-frame');
+        let currentCard = null;
+
+        const getCardInner = (card) => card?.querySelector('.milestone-card-inner') || card?.firstElementChild;
+
+        const getCardDetail = (card) => card?.querySelector('.mt-4');
+
+        const ensureViewingBadge = (card) => {
+            const inner = getCardInner(card);
+            if (!inner) return null;
+
+            let badge = inner.querySelector('.milestone-viewing-badge');
+            if (!badge) {
+                badge = document.createElement('div');
+                badge.className = 'milestone-viewing-badge absolute top-4 left-4 bg-primary/95 px-3 py-1 rounded text-[10px] font-black uppercase text-white shadow-lg z-20 hidden';
+                badge.textContent = 'Đang xem';
+                inner.appendChild(badge);
+            }
+            return badge;
+        };
+
+        const setCardViewingState = (card, isViewing) => {
+            const inner = getCardInner(card);
+            const detail = getCardDetail(card);
+            const badge = ensureViewingBadge(card);
+
+            if (inner) {
+                inner.classList.toggle('scale-105', isViewing);
+                inner.classList.toggle('shadow-primary/30', isViewing);
+            }
+
+            if (detail) {
+                detail.classList.toggle('h-auto', isViewing);
+                detail.classList.toggle('opacity-100', isViewing);
+                detail.classList.toggle('h-0', !isViewing);
+                detail.classList.toggle('opacity-0', !isViewing);
+            }
+
+            if (badge) {
+                badge.classList.toggle('hidden', !isViewing);
+            }
+        };
 
         const setActiveCard = (activeCard) => {
             cards.forEach((card) => {
-                const inner = card.querySelector('.milestone-card-inner') || card.firstElementChild;
+                const inner = getCardInner(card);
                 card.classList.remove('is-active');
                 if (inner) {
                     inner.classList.remove('border-primary/50');
                     inner.classList.add('border-white/5');
                 }
+                setCardViewingState(card, false);
             });
 
-            const activeInner = activeCard.querySelector('.milestone-card-inner') || activeCard.firstElementChild;
+            const activeInner = getCardInner(activeCard);
             activeCard.classList.add('is-active');
             if (activeInner) {
                 activeInner.classList.remove('border-white/5');
                 activeInner.classList.add('border-primary/50');
+            }
+            setCardViewingState(activeCard, true);
+        };
+
+        const updateMilestoneNavState = () => {
+            if (!cards.length || !currentCard) return;
+            const index = cards.indexOf(currentCard);
+            if (milestonePrevBtn) milestonePrevBtn.disabled = index <= 0;
+            if (milestoneNextBtn) milestoneNextBtn.disabled = index >= cards.length - 1;
+        };
+
+        const activateMilestone = (card, { scrollTop = true } = {}) => {
+            if (!card) return;
+
+            currentCard = card;
+            setActiveCard(card);
+            updateFeatured(card);
+            updateMilestoneNavState();
+
+            if (milestoneTrack) {
+                card.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
+
+            if (scrollTop) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         };
 
@@ -737,16 +819,37 @@
         });
 
         cards.forEach((card) => {
+            ensureViewingBadge(card);
             card.addEventListener('click', () => {
-                setActiveCard(card);
-                updateFeatured(card);
+                activateMilestone(card, { scrollTop: true });
             });
         });
 
+        if (milestonePrevBtn) {
+            milestonePrevBtn.addEventListener('click', () => {
+                if (!currentCard) return;
+                const currentIndex = cards.indexOf(currentCard);
+                const prevCard = cards[currentIndex - 1];
+                if (prevCard) {
+                    activateMilestone(prevCard, { scrollTop: false });
+                }
+            });
+        }
+
+        if (milestoneNextBtn) {
+            milestoneNextBtn.addEventListener('click', () => {
+                if (!currentCard) return;
+                const currentIndex = cards.indexOf(currentCard);
+                const nextCard = cards[currentIndex + 1];
+                if (nextCard) {
+                    activateMilestone(nextCard, { scrollTop: false });
+                }
+            });
+        }
+
         const initialCard = cards.find((card) => card.dataset.year === "tu-lieu") || cards[0];
         if (initialCard) {
-            setActiveCard(initialCard);
-            updateFeatured(initialCard);
+            activateMilestone(initialCard, { scrollTop: false });
         }
     </script>
 </body>
