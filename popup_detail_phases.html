@@ -89,7 +89,7 @@
                 <section>
                     <div class="flex items-center gap-3 mb-6">
                         <div class="h-8 w-1 bg-primary"></div>
-                        <h2 class="text-2xl font-bold">Chính sách then chốt</h2>
+                        <h2 class="text-2xl font-bold">Nội dung chính</h2>
                     </div>
                     <div id="policy-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
                 </section>
@@ -98,9 +98,19 @@
                     <div class="bg-primary/10 border border-primary/20 rounded-xl p-6">
                         <div class="flex items-center gap-3 mb-4">
                             <span class="material-symbols-outlined text-primary">verified</span>
-                            <h2 class="text-xl font-bold">Kết quả đạt được</h2>
+                            <h2 class="text-xl font-bold">Ý nghĩa lịch sử</h2>
                         </div>
                         <p id="result-text" class="text-slate-300"></p>
+                    </div>
+                </section>
+
+                <section>
+                    <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="material-symbols-outlined text-primary">fact_check</span>
+                            <h2 class="text-xl font-bold">Kết luận</h2>
+                        </div>
+                        <p id="conclusion-text" class="text-slate-300 leading-relaxed"></p>
                     </div>
                 </section>
             </div>
@@ -124,6 +134,14 @@
                     <h3 class="text-sm font-bold text-slate-500 uppercase tracking-widest mb-4">Chỉ số thống kê</h3>
                     <div id="stats-list" class="space-y-4"></div>
                 </div>
+
+                <div>
+                    <h3 class="text-sm font-bold text-slate-500 uppercase tracking-widest mb-4">Nguồn tham khảo</h3>
+                    <div class="flex items-start gap-3 text-slate-300">
+                        <span class="material-symbols-outlined text-primary mt-0.5">menu_book</span>
+                        <div id="reference-text" class="text-sm leading-relaxed space-y-2"></div>
+                    </div>
+                </div>
             </aside>
         </div>
     </div>
@@ -141,33 +159,44 @@
                     { icon: "public", title: "Góc nhìn hội nhập", desc: "Làm rõ tiến trình tham gia sâu vào kinh tế toàn cầu." },
                     { icon: "school", title: "Tư liệu học tập", desc: "Phù hợp tra cứu, học tập và thuyết trình lịch sử kinh tế." }
                 ],
-                result: "Nắm được toàn cảnh đổi mới một cách trực quan, mạch lạc và dễ so sánh giữa các giai đoạn.",
+                result: "Giúp khái quát tiến trình đổi mới của Việt Nam như một quá trình phát triển liên tục về tư duy, thể chế, kinh tế và hội nhập quốc tế.",
                 leaders: ["Nhiều thế hệ lãnh đạo", "Đội ngũ cải cách trung ương"],
                 location: "Việt Nam (toàn quốc)",
-                stats: [{ label: "Giai đoạn", value: "1986-2025" }, { label: "Mốc chính", value: "9" }]
+                stats: [{ label: "Giai đoạn", value: "1986-2025" }, { label: "Mốc chính", value: "9" }],
+                conclusion: "Toàn bộ hành trình đổi mới cho thấy sự vận động liên tục của đường lối phát triển đất nước dưới sự lãnh đạo của Đảng, từ đổi mới kinh tế đến hoàn thiện thể chế và hội nhập quốc tế.",
+                reference: `
+                    <p><a class="text-primary hover:underline" href="https://tulieuvankien.dangcongsan.vn/" target="_blank" rel="noopener noreferrer">Tư liệu - Văn kiện Đảng Cộng sản Việt Nam</a></p>
+                    <p><a class="text-primary hover:underline" href="https://dangcongsan.vn/" target="_blank" rel="noopener noreferrer">Báo điện tử Đảng Cộng sản Việt Nam</a></p>
+                `
             },
             "1986": {
                 label: "Sự kiện lịch sử quan trọng",
-                title: "1986: Đại hội VI - Khởi xướng Đổi mới",
+                title: "Khởi nguồn Đổi mới",
                 image: "https://petrovietnam.petrotimes.vn/stores/news_dataimages/nguyenphuong/102021/27/19/in_article/0335_dang-cong-san-viet-nam---niem-tin-niem-tu-hao-cua-dan-toc-viet-nam-1-164250.jpg?rt=20211027190336",
                 context: "Đứng trước khủng hoảng kinh tế - xã hội kéo dài, Việt Nam xác lập đường lối đổi mới toàn diện, chuyển từ cơ chế bao cấp sang vận hành theo cơ chế thị trường định hướng xã hội chủ nghĩa.",
                 policies: [
-                    { icon: "payments", title: "Xóa bao cấp", desc: "Từng bước bãi bỏ phân phối theo tem phiếu, tháo gỡ ách tắc lưu thông." },
-                    { icon: "groups", title: "Kinh tế nhiều thành phần", desc: "Thừa nhận vai trò của nhiều khu vực kinh tế cùng phát triển." },
-                    { icon: "inventory_2", title: "Ưu tiên sản xuất", desc: "Tập trung lương thực, thực phẩm, hàng tiêu dùng và xuất khẩu." },
-                    { icon: "psychology", title: "Đổi mới tư duy", desc: "Đề cao tư duy thực tiễn, nhìn thẳng vào sự thật." }
+                    { icon: "history_edu", title: "Tên học thuật", desc: "Đại hội VI của Đảng (12-1986) khởi xướng công cuộc Đổi mới toàn diện." },
+                    { icon: "payments", title: "Đổi mới cơ chế quản lý", desc: "Từng bước xóa bỏ cơ chế tập trung quan liêu bao cấp, tháo gỡ ách tắc lưu thông." },
+                    { icon: "groups", title: "Phát triển kinh tế nhiều thành phần", desc: "Thừa nhận sự tồn tại lâu dài của nhiều thành phần kinh tế trong thời kỳ quá độ." },
+                    { icon: "psychology", title: "Đổi mới tư duy lãnh đạo", desc: "Nhìn thẳng vào sự thật, đánh giá đúng sự thật, nói rõ sự thật." }
                 ],
                 result: "Mở ra bước ngoặt phát triển mới, tạo nền tảng cho tăng trưởng dài hạn và hội nhập quốc tế sau này.",
                 leaders: ["Trường Chinh", "Nguyễn Văn Linh"],
                 location: "Hà Nội",
-                stats: [{ label: "Lạm phát trước đổi mới", value: "~774%" }, { label: "Mức độ cải cách", value: "Toàn diện" }]
+                stats: [{ label: "Lạm phát trước đổi mới", value: "~774%" }, { label: "Mức độ cải cách", value: "Toàn diện" }],
+                conclusion: "Đại hội VI là mốc mở đầu công cuộc Đổi mới, đặt nền tảng cho toàn bộ những chuyển biến của Việt Nam trong các giai đoạn sau.",
+                reference: `
+                    <p><a class="text-primary hover:underline" href="https://tulieuvankien.dangcongsan.vn/ban-chap-hanh-trung-uong-dang/dai-hoi-dang/lan-thu-vi/dai-hoi-dai-bieu-toan-quoc-lan-thu-vi-cua-dang-19?categoryId=104000024" target="_blank" rel="noopener noreferrer">Đại hội đại biểu toàn quốc lần thứ VI của Đảng</a></p>
+                    <p><a class="text-primary hover:underline" href="https://dangcongsan.vn/laocai/xay-dung-dang/dai-hoi-vi-cua-dang-khoi-xuong-va-lanh-dao-su-nghiep-doi-moi-dat-nuoc.html" target="_blank" rel="noopener noreferrer">Đại hội VI của Đảng: Khởi xướng và lãnh đạo sự nghiệp đổi mới đất nước</a></p>
+                `
             },
             "1988": {
                 label: "Đổi mới quản lý kinh tế nông nghiệp",
-                title: "1988: Nghị quyết 10 và bước chuyển ở nông thôn",
+                title: "Giải phóng sức sản xuất ở nông thôn",
                 image: "https://petrovietnam.petrotimes.vn/stores/news_dataimages/nguyenphuong/102021/27/17/in_article/2809_Untitled.jpg?rt=20211027172812",
                 context: "Nghị quyết 10 của Bộ Chính trị về đổi mới quản lý kinh tế nông nghiệp đã phát huy vai trò chủ động của hộ nông dân, giải phóng sức sản xuất và tạo chuyển biến sâu sắc ở nông thôn.",
                 policies: [
+                    { icon: "history_edu", title: "Tên học thuật", desc: "Nghị quyết số 10 của Bộ Chính trị (1988) về đổi mới quản lý kinh tế nông nghiệp." },
                     { icon: "agriculture", title: "Khoán đến hộ", desc: "Hộ nông dân trở thành đơn vị sản xuất tương đối tự chủ." },
                     { icon: "inventory", title: "Chủ động sản xuất", desc: "Người dân có động lực hơn trong tổ chức lao động và sử dụng tư liệu sản xuất." },
                     { icon: "grain", title: "Tăng sản lượng lương thực", desc: "Sản xuất nông nghiệp phục hồi và phát triển rõ rệt." },
@@ -176,14 +205,20 @@
                 result: "Nông nghiệp thoát khỏi trì trệ, góp phần bảo đảm an ninh lương thực và tạo cơ sở quan trọng cho giai đoạn phát triển tiếp theo.",
                 leaders: ["Bộ Chính trị", "Lực lượng sản xuất ở nông thôn"],
                 location: "Việt Nam (nông thôn)",
-                stats: [{ label: "Trọng tâm", value: "Nông nghiệp" }, { label: "Tác động", value: "Rộng khắp" }]
+                stats: [{ label: "Trọng tâm", value: "Nông nghiệp" }, { label: "Tác động", value: "Rộng khắp" }],
+                conclusion: "Mốc 1988 chứng minh đổi mới chỉ thực sự đi vào đời sống khi đường lối được cụ thể hóa thành chính sách tác động trực tiếp tới sản xuất và người dân.",
+                reference: `
+                    <p><a class="text-primary hover:underline" href="https://chinhphu.vn/giai-doan-1986-2003-muoi-tam-nam-su-nghiep-doi-moi/i-chinh-phu-nhiem-ky-quoc-hoi-khoa-viii-1987-1992-2916" target="_blank" rel="noopener noreferrer">Cổng Thông tin điện tử Chính phủ: Giai đoạn 1987-1992, nêu trực tiếp Nghị quyết số 10-NQ/TW ngày 05/4/1988</a></p>
+                    <p><a class="text-primary hover:underline" href="https://tapchicongsan.org.vn/thong-tin-ly-luan/-/2018/25235/suc-song-ve-ly-luan-va-thuc-tien-cua-nghi-quyet-10%2C-bo-chinh-tri-khoa-vi-trong-25-nam-qua.aspx" target="_blank" rel="noopener noreferrer">Tạp chí Cộng sản: Sức sống về lý luận và thực tiễn của Nghị quyết 10, Bộ Chính trị khóa VI</a></p>
+                `
             },
             "1993": {
                 label: "Cải cách thể chế đất đai",
-                title: "1993: Hoàn thiện khung pháp lý đất đai",
+                title: "Hoàn thiện cơ sở pháp lý cho phát triển",
                 image: "https://th.bing.com/th/id/R.eb8dd5a8d36fc0b46b6afcc5ff6108a3?rik=A2xRxze6rO9XXQ&pid=ImgRaw&r=0",
                 context: "Khung pháp lý đất đai được hoàn thiện tạo điều kiện cho sản xuất, đầu tư và sử dụng tài sản hiệu quả hơn.",
                 policies: [
+                    { icon: "history_edu", title: "Tên học thuật", desc: "Luật Đất đai năm 1993, xác lập rõ hơn quyền sử dụng đất trong nền kinh tế đổi mới." },
                     { icon: "gavel", title: "Luật hóa quyền sử dụng", desc: "Xác lập rõ quyền, nghĩa vụ của người sử dụng đất." },
                     { icon: "receipt_long", title: "Chuẩn hóa thủ tục", desc: "Tăng tính minh bạch trong cấp và quản lý đất." },
                     { icon: "home_work", title: "Mở rộng giao dịch", desc: "Tạo điều kiện luân chuyển và khai thác giá trị đất." },
@@ -192,14 +227,20 @@
                 result: "Tạo nền móng thể chế quan trọng cho tăng trưởng khu vực sản xuất và bất động sản giai đoạn sau.",
                 leaders: ["Khối lập pháp", "Khối quản lý đất đai"],
                 location: "Việt Nam",
-                stats: [{ label: "Phạm vi", value: "Toàn quốc" }, { label: "Tác động", value: "Dài hạn" }]
+                stats: [{ label: "Phạm vi", value: "Toàn quốc" }, { label: "Tác động", value: "Dài hạn" }],
+                conclusion: "Luật Đất đai 1993 là một bước hoàn thiện thể chế quan trọng, cho thấy Đổi mới không chỉ là thay đổi nhận thức mà còn là xây dựng khung pháp lý cho phát triển.",
+                reference: `
+                    <p><a class="text-primary hover:underline" href="https://thuvienso.quochoi.vn/handle/11742/31710" target="_blank" rel="noopener noreferrer">Luật Đất đai năm 1993 - Thư viện số Quốc hội</a></p>
+                    <p><a class="text-primary hover:underline" href="https://thuvienso.quochoi.vn/handle/11742/31709?mode=simple" target="_blank" rel="noopener noreferrer">Báo cáo thẩm tra dự án Luật Đất đai (sửa đổi) - Thư viện số Quốc hội</a></p>
+                `
             },
             "1996": {
                 label: "Đẩy mạnh công nghiệp hóa",
-                title: "1996: Tăng tốc hiện đại hóa đất nước",
+                title: "Tăng tốc công nghiệp hóa, hiện đại hóa",
                 image: "https://img.loigiaihay.com/picture/article/2015/0823/ch20-0.jpg",
                 context: "Giai đoạn ưu tiên phát triển công nghiệp, hạ tầng và năng lực sản xuất để chuyển dịch cơ cấu kinh tế.",
                 policies: [
+                    { icon: "history_edu", title: "Tên học thuật", desc: "Đại hội VIII của Đảng (1996) xác định đẩy mạnh công nghiệp hóa, hiện đại hóa đất nước." },
                     { icon: "factory", title: "Phát triển công nghiệp", desc: "Mở rộng các ngành chế biến và sản xuất chủ lực." },
                     { icon: "domain", title: "Đầu tư hạ tầng", desc: "Nâng cấp giao thông, điện năng và logistics." },
                     { icon: "construction", title: "Khu công nghiệp", desc: "Hình thành các cụm sản xuất tập trung." },
@@ -208,14 +249,20 @@
                 result: "Cơ cấu kinh tế chuyển dịch nhanh, công nghiệp giữ vai trò ngày càng lớn trong tăng trưởng.",
                 leaders: ["Khối hoạch định kinh tế", "Lãnh đạo địa phương"],
                 location: "Các vùng công nghiệp trọng điểm",
-                stats: [{ label: "Trọng tâm", value: "Công nghiệp" }, { label: "Mức độ", value: "Tăng tốc" }]
+                stats: [{ label: "Trọng tâm", value: "Công nghiệp" }, { label: "Mức độ", value: "Tăng tốc" }],
+                conclusion: "Đại hội VIII đánh dấu bước phát triển mới của công cuộc Đổi mới, chuyển trọng tâm sang đẩy mạnh công nghiệp hóa, hiện đại hóa để xây dựng nền tảng vật chất cho chủ nghĩa xã hội.",
+                reference: `
+                    <p><a class="text-primary hover:underline" href="https://tulieuvankien.dangcongsan.vn/ban-chap-hanh-trung-uong-dang/dai-hoi-dang/lan-thu-viii/nghi-quyet-dai-hoi-dai-bieu-toan-quoc-lan-thu-viii-dang-cong-san-viet-nam-1554?categoryId=104000022" target="_blank" rel="noopener noreferrer">Nghị quyết Đại hội đại biểu toàn quốc lần thứ VIII</a></p>
+                    <p><a class="text-primary hover:underline" href="https://dangcongsan.vn/cantho/tin-tuc-hoat-dong/dai-hoi-viii-cua-dang-tien-de-cho-cong-cuoc-cong-nghiep-hoa-hien-dai-hoa-.html" target="_blank" rel="noopener noreferrer">Đại hội VIII của Đảng: Tiền đề cho công cuộc công nghiệp hóa, hiện đại hóa</a></p>
+                `
             },
             "2007": {
                 label: "Hội nhập toàn cầu",
-                title: "2007: Việt Nam gia nhập WTO",
+                title: "Vươn ra biển lớn",
                 image: "https://phunuvietnam.mediacdn.vn/179072216278405120/2023/12/25/anh-ngoc-khoi-17035121491081711497012.jpg",
                 context: "Gia nhập WTO đánh dấu bước ngoặt hội nhập sâu với thị trường toàn cầu và thúc đẩy cải cách thể chế trong nước.",
                 policies: [
+                    { icon: "history_edu", title: "Tên học thuật", desc: "Việt Nam gia nhập WTO năm 2007, đẩy mạnh hội nhập kinh tế quốc tế." },
                     { icon: "public", title: "Mở cửa thương mại", desc: "Gắn kết mạnh hơn với thị trường quốc tế." },
                     { icon: "rule", title: "Chuẩn hóa thể chế", desc: "Tiệm cận chuẩn mực cạnh tranh và pháp lý quốc tế." },
                     { icon: "shopping_cart", title: "Mở rộng xuất khẩu", desc: "Doanh nghiệp tận dụng tốt hơn các thị trường mới." },
@@ -224,15 +271,21 @@
                 result: "Động lực tăng trưởng thương mại và đầu tư được mở rộng, nâng vị thế Việt Nam trên bản đồ kinh tế thế giới.",
                 leaders: ["Đoàn đàm phán hội nhập", "Cộng đồng doanh nghiệp"],
                 location: "Việt Nam - WTO",
-                stats: [{ label: "Mốc", value: "Gia nhập WTO" }, { label: "Tác động", value: "Toàn nền kinh tế" }]
+                stats: [{ label: "Mốc", value: "Gia nhập WTO" }, { label: "Tác động", value: "Toàn nền kinh tế" }],
+                conclusion: "Việt Nam gia nhập WTO là dấu mốc khẳng định đất nước bước vào giai đoạn hội nhập kinh tế quốc tế sâu rộng hơn, với yêu cầu cao hơn về thể chế và năng lực cạnh tranh.",
+                reference: `
+                    <p><a class="text-primary hover:underline" href="https://www.wto.org/english/thewto_e/countries_e/vietnam_e.htm" target="_blank" rel="noopener noreferrer">WTO - Viet Nam Member Information</a></p>
+                    <p><a class="text-primary hover:underline" href="https://www.wto.org/english/thewto_e/acc_e/a1_vietnam_e.htm" target="_blank" rel="noopener noreferrer">WTO - Accessions: Viet Nam</a></p>
+                `
             },
             "2015": {
                 label: "FTA thế hệ mới",
-                title: "2015: Đẩy mạnh hội nhập kinh tế quốc tế sâu rộng",
+                title: "Mở rộng không gian phát triển",
                 image: "https://azfin.vn/wp-content/uploads/2023/06/3-8.png.webp",
-                context: "Việt Nam bước vào giai đoạn thúc đẩy mạnh các FTA thế hệ mới, qua đó mở rộng thị trường, nâng chuẩn thể chế và tăng sức cạnh tranh của nền kinh tế.",
+                context: "Từ khoảng năm 2015, Việt Nam bước vào giai đoạn thúc đẩy mạnh đàm phán, ký kết và chuẩn bị thực thi các FTA thế hệ mới, qua đó mở rộng thị trường và nâng chuẩn hội nhập.",
                 policies: [
-                    { icon: "handshake", title: "Đàm phán FTA", desc: "Mở rộng mạng lưới đối tác kinh tế chiến lược." },
+                    { icon: "history_edu", title: "Tên học thuật", desc: "Giai đoạn đẩy mạnh hội nhập kinh tế quốc tế sâu rộng thông qua các FTA thế hệ mới." },
+                    { icon: "handshake", title: "Đàm phán và ký kết FTA", desc: "Mở rộng mạng lưới đối tác kinh tế chiến lược với tiêu chuẩn cam kết cao hơn." },
                     { icon: "verified_user", title: "Nâng chuẩn chất lượng", desc: "Thúc đẩy tiêu chuẩn sản xuất, quản trị và lao động." },
                     { icon: "local_shipping", title: "Thúc đẩy xuất khẩu", desc: "Tận dụng ưu đãi thuế quan và chuỗi cung ứng." },
                     { icon: "monitoring", title: "Đổi mới quản trị", desc: "Doanh nghiệp nâng năng lực vận hành theo chuẩn quốc tế." }
@@ -240,14 +293,20 @@
                 result: "Khả năng cạnh tranh của nền kinh tế được cải thiện, thị trường xuất khẩu đa dạng hơn.",
                 leaders: ["Khối đối ngoại kinh tế", "Hiệp hội doanh nghiệp"],
                 location: "Việt Nam - các đối tác FTA",
-                stats: [{ label: "Trọng tâm", value: "Hội nhập" }, { label: "Mức độ", value: "Sâu rộng" }]
+                stats: [{ label: "Trọng tâm", value: "Hội nhập" }, { label: "Mức độ", value: "Sâu rộng" }],
+                conclusion: "Giai đoạn hội nhập với các FTA thế hệ mới cho thấy Đổi mới đã phát triển từ mở cửa sang hội nhập sâu, gắn với yêu cầu nâng chuẩn thể chế và nâng cao sức cạnh tranh quốc gia.",
+                reference: `
+                    <p><a class="text-primary hover:underline" href="https://vntr.moit.gov.vn/vi/fta/31/0" target="_blank" rel="noopener noreferrer">Bộ Công Thương - Hiệp định EVFTA, giới thiệu chung</a></p>
+                    <p><a class="text-primary hover:underline" href="https://vntr.moit.gov.vn/vi/fta/29/0" target="_blank" rel="noopener noreferrer">Bộ Công Thương - Hiệp định CPTPP, giới thiệu chung</a></p>
+                `
             },
             "2020": {
                 label: "Thích ứng và chuyển đổi số",
-                title: "2020: Thích ứng trước biến động và thúc đẩy chuyển đổi số",
+                title: "Bản lĩnh Việt Nam trong biến động",
                 image: "https://vnn-imgs-f.vgcloud.vn/2021/01/11/15/doi-ngoai-viet-nam-2020-ban-linh-va-tam-the-moi-1.jpg",
                 context: "Trong bối cảnh đại dịch COVID-19 và biến động toàn cầu, Việt Nam vừa duy trì ổn định kinh tế - xã hội, vừa thúc đẩy mạnh chuyển đổi số trong quản lý, sản xuất và đời sống.",
                 policies: [
+                    { icon: "history_edu", title: "Tên học thuật", desc: "Thích ứng trước đại dịch và thúc đẩy chuyển đổi số quốc gia từ năm 2020." },
                     { icon: "devices", title: "Số hóa dịch vụ", desc: "Mở rộng ứng dụng số trong quản lý và kinh doanh." },
                     { icon: "shield", title: "Ổn định kinh tế", desc: "Điều hành linh hoạt để giảm tác động bất lợi." },
                     { icon: "hub", title: "Tăng năng lực kết nối", desc: "Đẩy mạnh hạ tầng số và nền tảng dữ liệu." },
@@ -256,14 +315,20 @@
                 result: "Nền kinh tế thể hiện năng lực thích ứng tốt, thúc đẩy nhanh tiến trình chuyển đổi số quốc gia.",
                 leaders: ["Khối điều hành vĩ mô", "Doanh nghiệp công nghệ"],
                 location: "Việt Nam",
-                stats: [{ label: "Trọng tâm", value: "Chuyển đổi số" }, { label: "Tính chất", value: "Thích ứng" }]
+                stats: [{ label: "Trọng tâm", value: "Chuyển đổi số" }, { label: "Tính chất", value: "Thích ứng" }],
+                conclusion: "Mốc 2020 cho thấy năng lực thích ứng của Việt Nam trong bối cảnh khó khăn toàn cầu, đồng thời đánh dấu bước chuyển rõ rệt sang phát triển trên nền tảng số.",
+                reference: `
+                    <p><a class="text-primary hover:underline" href="https://congbao.chinhphu.vn/van-ban/quyet-dinh-so-749-qd-ttg-31450.htm" target="_blank" rel="noopener noreferrer">Quyết định số 749/QĐ-TTg về Chương trình Chuyển đổi số quốc gia</a></p>
+                    <p><a class="text-primary hover:underline" href="https://vanban.chinhphu.vn/default.aspx?docid=200163&pageid=27160" target="_blank" rel="noopener noreferrer">Văn bản Chính phủ - Quyết định 749/QĐ-TTg</a></p>
+                `
             },
             "2024": {
                 label: "Tầm nhìn phát triển bền vững",
-                title: "2024: Phát triển nhanh gắn với bền vững và đổi mới sáng tạo",
+                title: "Phát triển nhanh gắn với bền vững",
                 image: "https://mediafile.qdnd.vn/images/2024/10/28/cover-bai-1-2.jpg",
-                context: "Giai đoạn gần đây nhấn mạnh yêu cầu hoàn thiện thể chế, phát triển khoa học công nghệ, đổi mới sáng tạo, chuyển đổi xanh và nâng cao chất lượng nguồn nhân lực.",
+                context: "Giai đoạn gần đây nhấn mạnh yêu cầu phát triển nhanh gắn với bền vững, thúc đẩy đổi mới sáng tạo, chuyển đổi số, tăng trưởng xanh và nâng cao chất lượng nguồn nhân lực.",
                 policies: [
+                    { icon: "history_edu", title: "Tên học thuật", desc: "Tiếp tục hoàn thiện định hướng phát triển nhanh, bền vững, gắn với đổi mới sáng tạo và chuyển đổi xanh." },
                     { icon: "psychiatry", title: "Đổi mới sáng tạo", desc: "Khuyến khích phát triển hệ sinh thái công nghệ." },
                     { icon: "energy_savings_leaf", title: "Chuyển dịch xanh", desc: "Đẩy mạnh tăng trưởng bền vững và phát thải thấp." },
                     { icon: "groups_3", title: "Nâng chất lượng nhân lực", desc: "Tập trung đào tạo kỹ năng cho ngành giá trị cao." },
@@ -272,14 +337,20 @@
                 result: "Tạo nền tảng phát triển dài hạn, cân bằng giữa tốc độ tăng trưởng và chất lượng tăng trưởng.",
                 leaders: ["Khối hoạch định chiến lược", "Doanh nghiệp đổi mới sáng tạo"],
                 location: "Việt Nam",
-                stats: [{ label: "Định hướng", value: "Xanh - Số - Công nghệ" }, { label: "Mục tiêu", value: "Dài hạn" }]
+                stats: [{ label: "Định hướng", value: "Xanh - Số - Công nghệ" }, { label: "Mục tiêu", value: "Dài hạn" }],
+                conclusion: "Nội dung của giai đoạn gần đây cho thấy công cuộc Đổi mới tiếp tục được phát triển theo chiều sâu, lấy chất lượng tăng trưởng, đổi mới sáng tạo và phát triển bền vững làm trọng tâm.",
+                reference: `
+                    <p><a class="text-primary hover:underline" href="https://tulieuvankien.dangcongsan.vn/print/3782/thuc-day-doi-moi-sang-tao-chuyen-giao-ung-dung-va-phat-trien-manh-me-khoa-hoc-va-cong-nghe-trong-van-kien-dai-hoi-xiii-cua-dang" target="_blank" rel="noopener noreferrer">Tư liệu - Văn kiện Đảng: Thúc đẩy đổi mới sáng tạo, khoa học và công nghệ trong Văn kiện Đại hội XIII</a></p>
+                    <p><a class="text-primary hover:underline" href="https://congbao.chinhphu.vn/van-ban/quyet-dinh-so-1658-qd-ttg-34550.htm" target="_blank" rel="noopener noreferrer">Quyết định số 1658/QĐ-TTg về Chiến lược quốc gia về tăng trưởng xanh giai đoạn 2021-2030</a></p>
+                `
             },
             "2025": {
                 label: "Tiếp nối tinh thần đổi mới",
-                title: "2025: Hoàn thiện định hướng phát triển trong giai đoạn mới",
+                title: "Tiếp nối tinh thần Đổi mới",
                 image: "https://xdcs.cdnchinhphu.vn/446259493575335936/2026/1/5/kinh-te-viet-nam-2023-nhan-dien-thach-thuc-va-dong-luc-tang-truong-20230914154226-17573776856651412893381-1767603903980576867905.jpg",
-                context: "Bước sang giai đoạn mới, Việt Nam tiếp tục nhấn mạnh yêu cầu phát triển nhanh đi đôi với bền vững, nâng cao chất lượng tăng trưởng, phát huy khoa học công nghệ và hội nhập hiệu quả.",
+                context: "Trong giai đoạn hiện nay, Việt Nam tiếp tục nhấn mạnh yêu cầu phát triển nhanh đi đôi với bền vững, nâng cao chất lượng tăng trưởng, phát huy khoa học công nghệ và chủ động hội nhập quốc tế.",
                 policies: [
+                    { icon: "history_edu", title: "Tên học thuật", desc: "Tiếp nối công cuộc Đổi mới trong giai đoạn phát triển mới với trọng tâm là thể chế, khoa học công nghệ và hội nhập." },
                     { icon: "route", title: "Hoàn thiện định hướng phát triển", desc: "Bảo đảm sự kế thừa giữa đổi mới kinh tế và yêu cầu phát triển mới." },
                     { icon: "science", title: "Khoa học công nghệ", desc: "Xem đây là động lực quan trọng của tăng trưởng." },
                     { icon: "account_tree", title: "Nâng cấp mô hình tăng trưởng", desc: "Ưu tiên chất lượng, hiệu quả và sức cạnh tranh." },
@@ -288,7 +359,13 @@
                 result: "Thể hiện sự tiếp nối tinh thần đổi mới trong bối cảnh mới, kết hợp giữa phát triển kinh tế, hoàn thiện thể chế và nâng cao vị thế đất nước.",
                 leaders: ["Khối hoạch định chiến lược", "Các lực lượng tham gia phát triển"],
                 location: "Việt Nam",
-                stats: [{ label: "Định hướng", value: "Bền vững" }, { label: "Động lực", value: "Thể chế + KHCN" }]
+                stats: [{ label: "Định hướng", value: "Bền vững" }, { label: "Động lực", value: "Thể chế + KHCN" }],
+                conclusion: "Đây là điểm tiếp nối của toàn bộ hành trình đổi mới, thể hiện yêu cầu phát triển đất nước trong giai đoạn mới trên nền tảng những thành tựu đã tích lũy từ năm 1986.",
+                reference: `
+                    <p><a class="text-primary hover:underline" href="https://tulieuvankien.dangcongsan.vn/print/3782/thuc-day-doi-moi-sang-tao-chuyen-giao-ung-dung-va-phat-trien-manh-me-khoa-hoc-va-cong-nghe-trong-van-kien-dai-hoi-xiii-cua-dang" target="_blank" rel="noopener noreferrer">Tư liệu - Văn kiện Đảng: Khoa học, công nghệ và đổi mới sáng tạo trong Văn kiện Đại hội XIII</a></p>
+                    <p><a class="text-primary hover:underline" href="https://congbao.chinhphu.vn/van-ban/quyet-dinh-so-749-qd-ttg-31450.htm" target="_blank" rel="noopener noreferrer">Quyết định số 749/QĐ-TTg về Chương trình Chuyển đổi số quốc gia</a></p>
+                    <p><a class="text-primary hover:underline" href="https://congbao.chinhphu.vn/van-ban/quyet-dinh-so-1658-qd-ttg-34550.htm" target="_blank" rel="noopener noreferrer">Quyết định số 1658/QĐ-TTg về Chiến lược quốc gia về tăng trưởng xanh</a></p>
+                `
             }
         };
 
@@ -302,16 +379,20 @@
         const contextText = document.getElementById('context-text');
         const policyGrid = document.getElementById('policy-grid');
         const resultText = document.getElementById('result-text');
+        const conclusionText = document.getElementById('conclusion-text');
         const leaderList = document.getElementById('leader-list');
         const locationText = document.getElementById('location-text');
         const statsList = document.getElementById('stats-list');
+        const referenceText = document.getElementById('reference-text');
 
         heroBg.style.backgroundImage = `linear-gradient(to bottom, rgba(22, 10, 10, 0.2), rgba(22, 10, 10, 1)), url('${data.image}')`;
         eventLabel.textContent = data.label;
         heroTitle.textContent = data.title;
         contextText.textContent = data.context;
         resultText.textContent = data.result;
+        conclusionText.textContent = data.conclusion || "";
         locationText.textContent = data.location;
+        referenceText.innerHTML = data.reference || `<p><a class="text-primary hover:underline" href="https://tulieuvankien.dangcongsan.vn/" target="_blank" rel="noopener noreferrer">Tư liệu - Văn kiện Đảng Cộng sản Việt Nam</a></p>`;
 
         policyGrid.innerHTML = data.policies.map(item => `
             <div class="bg-white/5 border border-white/10 p-5 rounded-xl flex gap-4 hover:bg-white/10 transition-colors">

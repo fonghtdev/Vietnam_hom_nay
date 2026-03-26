@@ -78,10 +78,15 @@
             class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/20 bg-background-dark/80 backdrop-blur-md px-6 md:px-10 py-3">
             <div class="flex items-center gap-8">
                 <div class="flex items-center gap-3 text-primary">
-                    <span class="material-symbols-outlined text-3xl font-bold">movie_filter</span>
-                    <h2 class="text-white text-xl font-display font-black leading-tight tracking-tight uppercase">Việt
-                        Nam
-                        Hôm Nay </h2>
+                    <span class="inline-flex items-center justify-center h-9 w-9 rounded-md overflow-hidden shadow-sm"
+                        aria-hidden="true">
+                        <svg viewBox="0 0 64 64" class="h-full w-full" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="64" height="64" fill="#da251d" />
+                            <polygon fill="#ffde00"
+                                points="32,14 36.7,26.2 49.7,26.8 39.5,34.8 43.4,47.2 32,39.9 20.6,47.2 24.5,34.8 14.3,26.8 27.3,26.2" />
+                        </svg>
+                    </span>
+                    <h2 class="text-white text-xl font-display font-black leading-tight tracking-tight uppercase">Việt Nam Hôm Nay</h2>
                 </div>
             </div>
         </header>
@@ -146,7 +151,10 @@
                             Đang trình chiếu: Tư liệu</h4>
                         <h2 id="featured-title" class="font-display text-3xl font-black text-white mb-4">Hành trình
                             Đổi mới</h2>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                        <div id="featured-overview"
+                            class="hidden mb-6 rounded-xl border border-white/10 bg-white/5 p-5 text-slate-300 text-base leading-relaxed">
+                        </div>
+                        <div id="featured-detail-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                             <div class="space-y-1">
                                 <span class="text-accent-gold text-xs font-bold uppercase block">Chính sách</span>
                                 <p id="featured-policy" class="text-slate-300 text-sm">Tổng hợp định hướng cải cách, mở
@@ -201,6 +209,28 @@
                     </div>
                 </div>
                 <div id="milestone-track" class="flex gap-6 overflow-x-auto px-6 md:px-20 hide-scrollbar pb-10">
+                    <!-- Việt Nam hôm nay -->
+                    <div class="min-w-[280px] group cursor-pointer milestone-card" data-year="vietnam-now"
+                        data-display="Việt Nam hôm nay">
+                        <div
+                            class="milestone-card-inner relative aspect-[2/3] rounded-xl overflow-hidden shadow-lg transition-transform duration-300 group-hover:scale-105 border border-white/5 group-hover:border-primary/50">
+                            <img class="w-full h-full object-cover" data-alt="Vietnam today with modern development"
+                                src="https://cdn.luatminhkhue.vn/lmk/articles/95/478526/bai-van-ta-canh-dep-dat-nuoc-478526.jpg" />
+                            <div class="absolute inset-0 card-gradient"></div>
+                            <div
+                                class="absolute top-4 right-4 bg-accent-gold text-black px-3 py-1 rounded text-[10px] font-black uppercase shadow-lg z-20">
+                                MỞ ĐẦU</div>
+                            <div class="absolute bottom-0 p-5 w-full">
+                                <span class="text-primary font-black text-3xl mb-1 block">HIỆN NAY</span>
+                                <h4 class="text-white font-bold text-lg leading-tight">Việt Nam Hôm Nay</h4>
+                                <div
+                                    class="mt-4 h-0 overflow-hidden group-hover:h-auto transition-all duration-500 opacity-0 group-hover:opacity-100">
+                                    <p class="text-slate-300 text-xs line-clamp-2">Diện mạo
+                                        Việt Nam trong giai đoạn hiện nay.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <!-- Tư liệu -->
                     <div class="min-w-[280px] group cursor-pointer milestone-card is-active" data-year="tu-lieu"
                         data-display="Tư liệu">
@@ -439,10 +469,41 @@
             </div>
         </div>
     </div>
+    <div id="notice-modal" class="fixed inset-0 z-[120] hidden">
+        <div id="notice-modal-backdrop" class="absolute inset-0 bg-black/75 backdrop-blur-sm"></div>
+        <div id="notice-modal-shell" class="relative z-[121] h-full w-full flex items-center justify-center p-4">
+            <div
+                class="relative w-full max-w-md rounded-2xl overflow-hidden border border-white/15 bg-background-dark shadow-2xl shadow-black/60">
+                <div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent-gold/10"></div>
+                <div class="relative p-6 md:p-7">
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="shrink-0 h-14 w-14 rounded-2xl bg-primary/15 border border-primary/25 flex items-center justify-center">
+                            <span id="notice-modal-icon" class="text-3xl">😢</span>
+                        </div>
+                        <div class="flex-1">
+                            <p id="notice-modal-label"
+                                class="text-primary text-xs font-bold uppercase tracking-[0.25em] mb-2">Thông báo</p>
+                            <h3 id="notice-modal-title" class="text-white text-xl font-display font-black mb-3">Chưa có
+                                video</h3>
+                            <p id="notice-modal-message" class="text-slate-300 text-sm leading-relaxed"></p>
+                        </div>
+                    </div>
+                    <div class="mt-6 flex justify-end">
+                        <button id="notice-modal-close-btn"
+                            class="inline-flex items-center justify-center rounded-lg h-11 px-5 bg-primary hover:bg-red-700 text-white text-sm font-bold transition">
+                            Đã hiểu
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         // Cau hinh anh HERO theo tung the. Chi can thay link trong block nay.
-        // Key hop le: "tu-lieu", "1986", "1988", "1993", "1996", "2007", "2015", "2020", "2024", "2025"
+        // Key hop le: "vietnam-now", "tu-lieu", "1986", "1988", "1993", "1996", "2007", "2015", "2020", "2024", "2025"
         const heroImageByKey = {
+            "vietnam-now": "https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=1400&q=80",
             "tu-lieu": "https://vanhoathoidai.vn/uploads/images/blog/huyhoang/2025/07/20/z6823925834733-ebdf9d8ffc5bbc6349b22391bb827933-1753019646.jpg",
             "1986": "https://petrovietnam.petrotimes.vn/stores/news_dataimages/nguyenphuong/102021/27/19/in_article/0335_dang-cong-san-viet-nam---niem-tin-niem-tu-hao-cua-dan-toc-viet-nam-1-164250.jpg?rt=20211027190336",
             "1988": "https://nongthonvaphattrien.vn/uploads/images/blog/quyettuan/2026/03/25/img-8972-1774443570.jpeg",
@@ -457,7 +518,8 @@
 
         // Mapping video
         const videoByKey = {
-            "tu-lieu": "https://www.youtube.com/watch?v=VK6PsKXHMa0",
+            "vietnam-now": "https://www.youtube.com/watch?v=NSnkb1IAjbE&list=RDNSnkb1IAjbE&start_radio=1",
+            "tu-lieu": "https://www.youtube.com/watch?v=yk57ZbjqOlc",
             "1986": "https://www.youtube.com/watch?v=xFHawdU99KQ",
             "1988": "https://www.youtube.com/watch?v=dHIJ9g35eME&source_ve_path=OTY3MTQ&embeds_referring_euri=https%3A%2F%2Fnongthonvaphattrien.vn%2F",
             "1993": "",
@@ -471,6 +533,7 @@
 
         // Mapping detail
         const detailPageByKey = {
+            "vietnam-now": "popup_detail_phases.html?phase=tu-lieu",
             "tu-lieu": "popup_detail_phases.html?phase=tu-lieu",
             "1986": "popup_detail_phases.html?phase=1986",
             "1988": "popup_detail_phases.html?phase=1988",
@@ -484,10 +547,14 @@
         };
 
         const milestoneDetails = {
+            "vietnam-now": {
+                overview: "Việt Nam – đất nước, quê hương tôi – hôm nay đang đổi thay từng ngày với những thành phố hiện đại, những miền quê khởi sắc và nhịp sống giàu sức sống. Từ điểm nhìn của hiện tại, hành trình Đổi mới hiện lên như một bước ngoặt lớn, góp phần làm nên diện mạo đất nước hôm nay.",
+                result: "Mở đầu bài trình bày bằng hình ảnh Việt Nam hiện nay để kết nối cảm xúc với các cột mốc lịch sử phía sau."
+            },
             "tu-lieu": {
                 policy: "Tổng hợp định hướng cải cách, mở cửa và hội nhập theo từng giai đoạn.",
                 activity: "Kết nối các mốc lịch sử, chính sách trọng điểm và chuyển biến kinh tế - xã hội.",
-                result: "Giúp theo dõi toàn cảnh hành trình Đổi mới một cách trực quan và liền mạch."
+                result: "Theo dõi toàn cảnh hành trình Đổi mới một cách trực quan và liền mạch."
             },
             "1986": {
                 policy: "Xóa bỏ cơ chế tập trung, phát triển kinh tế nhiều thành phần.",
@@ -515,8 +582,8 @@
                 result: "Thương mại bứt phá, doanh nghiệp Việt Nam tham gia sâu hơn chuỗi giá trị."
             },
             "2015": {
-                policy: "Đẩy mạnh hội nhập kinh tế quốc tế thông qua các FTA thế hệ mới.",
-                activity: "Mở rộng mạng lưới đối tác, nâng chuẩn thể chế và năng lực cạnh tranh.",
+                policy: "Đẩy mạnh đàm phán, ký kết và chuẩn bị thực thi các FTA thế hệ mới.",
+                activity: "Mở rộng mạng lưới đối tác, nâng chuẩn hội nhập và năng lực cạnh tranh.",
                 result: "Tạo thêm không gian phát triển và đa dạng hóa thị trường xuất khẩu."
             },
             "2020": {
@@ -526,12 +593,12 @@
             },
             "2024": {
                 policy: "Tập trung phát triển nhanh gắn với bền vững, đổi mới sáng tạo và chuyển đổi xanh.",
-                activity: "Hoàn thiện thể chế, phát triển khoa học công nghệ, hạ tầng số và nguồn nhân lực chất lượng cao.",
+                activity: "Phát triển khoa học công nghệ, chuyển đổi số, tăng trưởng xanh và nguồn nhân lực chất lượng cao.",
                 result: "Tạo nền tảng cho tăng trưởng chất lượng cao và hội nhập hiệu quả hơn trong giai đoạn mới."
             },
             "2025": {
                 policy: "Tiếp nối tinh thần đổi mới bằng yêu cầu nâng cao chất lượng tăng trưởng và hoàn thiện thể chế.",
-                activity: "Nhấn mạnh vai trò của khoa học công nghệ, chuyển đổi số và hội nhập chủ động.",
+                activity: "Nhấn mạnh vai trò của khoa học công nghệ, chuyển đổi số, tăng trưởng xanh và hội nhập chủ động.",
                 result: "Thể hiện sự phát triển liên tục của công cuộc Đổi mới trong bối cảnh mới."
             }
         };
@@ -540,6 +607,8 @@
         const featuredImage = document.getElementById('featured-image');
         const featuredKicker = document.getElementById('featured-kicker');
         const featuredTitle = document.getElementById('featured-title');
+        const featuredOverview = document.getElementById('featured-overview');
+        const featuredDetailGrid = document.getElementById('featured-detail-grid');
         const featuredPolicy = document.getElementById('featured-policy');
         const featuredActivity = document.getElementById('featured-activity');
         const featuredResult = document.getElementById('featured-result');
@@ -560,6 +629,13 @@
         const videoModalBackdrop = document.getElementById('video-modal-backdrop');
         const videoModalShell = document.getElementById('video-modal-shell');
         const videoModalFrame = document.getElementById('video-modal-frame');
+        const noticeModal = document.getElementById('notice-modal');
+        const noticeModalBackdrop = document.getElementById('notice-modal-backdrop');
+        const noticeModalShell = document.getElementById('notice-modal-shell');
+        const noticeModalIcon = document.getElementById('notice-modal-icon');
+        const noticeModalTitle = document.getElementById('notice-modal-title');
+        const noticeModalMessage = document.getElementById('notice-modal-message');
+        const noticeModalCloseBtn = document.getElementById('notice-modal-close-btn');
         let currentCard = null;
 
         const getCardInner = (card) => card?.querySelector('.milestone-card-inner') || card?.firstElementChild;
@@ -667,16 +743,29 @@
                 featuredTitle.textContent = /^\d/.test(year) && !cleanTitle.startsWith(year) ? `${year}: ${cleanTitle}` : cleanTitle;
             }
 
-            if (featuredPolicy) {
-                featuredPolicy.textContent = details.policy || featuredPolicy.textContent;
+            const isVietnamNow = year === "vietnam-now";
+
+            if (featuredOverview) {
+                featuredOverview.textContent = details.overview || "";
+                featuredOverview.classList.toggle('hidden', !isVietnamNow);
             }
 
-            if (featuredActivity) {
-                featuredActivity.textContent = details.activity || featuredActivity.textContent;
+            if (featuredDetailGrid) {
+                featuredDetailGrid.classList.toggle('hidden', isVietnamNow);
             }
 
-            if (featuredResult) {
-                featuredResult.textContent = details.result || featuredResult.textContent;
+            if (!isVietnamNow) {
+                if (featuredPolicy) {
+                    featuredPolicy.textContent = details.policy || featuredPolicy.textContent;
+                }
+
+                if (featuredActivity) {
+                    featuredActivity.textContent = details.activity || featuredActivity.textContent;
+                }
+
+                if (featuredResult) {
+                    featuredResult.textContent = details.result || featuredResult.textContent;
+                }
             }
 
             if (heroBackground && imageNode) {
@@ -696,12 +785,14 @@
             }
 
             if (heroDescription) {
-                heroDescription.textContent = details.result || details.activity || heroDescription.textContent;
+                heroDescription.textContent = details.overview || details.result || details.activity || heroDescription.textContent;
+                heroDescription.classList.toggle('hidden', isVietnamNow);
             }
 
             if (heroDetailBtn) {
                 const mappedUrl = detailPageByKey[year] || `popup_detail_phases.html?phase=${encodeURIComponent(year)}`;
                 heroDetailBtn.dataset.href = mappedUrl;
+                heroDetailBtn.classList.toggle('hidden', isVietnamNow);
             }
 
             if (heroWatchBtn) {
@@ -736,6 +827,21 @@
             if (!videoModal || !videoModalFrame) return;
             videoModal.classList.add('hidden');
             videoModalFrame.src = "about:blank";
+            document.body.classList.remove('overflow-hidden');
+        };
+
+        const openNoticeModal = ({ title, message, icon = "😢" }) => {
+            if (!noticeModal || !noticeModalTitle || !noticeModalMessage || !noticeModalIcon) return;
+            noticeModalTitle.textContent = title || "Thông báo";
+            noticeModalMessage.textContent = message || "";
+            noticeModalIcon.textContent = icon;
+            noticeModal.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        };
+
+        const closeNoticeModal = () => {
+            if (!noticeModal) return;
+            noticeModal.classList.add('hidden');
             document.body.classList.remove('overflow-hidden');
         };
 
@@ -782,7 +888,11 @@
             heroWatchBtn.addEventListener('click', () => {
                 const targetUrl = (heroWatchBtn.dataset.href || "").trim();
                 if (!targetUrl) {
-                    alert(`Chưa gắn link video cho mốc ${heroWatchBtn.dataset.year || ""}.`);
+                    openNoticeModal({
+                        title: "Chưa tìm thấy video",
+                        message: `Hiện tại WEB chưa tìm được nguồn video phù hợp cho mốc ${heroWatchBtn.dataset.year || ""}. Bạn có thể thử tìm kiếm trên YouTube với từ khóa "Đổi mới ${heroWatchBtn.dataset.year || ""}" để xem các video liên quan.`,
+                        icon: "😢"
+                    });
                     return;
                 }
                 openVideoModal(targetUrl);
@@ -813,10 +923,28 @@
             });
         }
 
+        if (noticeModalBackdrop) {
+            noticeModalBackdrop.addEventListener('click', closeNoticeModal);
+        }
+
+        if (noticeModalShell) {
+            noticeModalShell.addEventListener('click', (event) => {
+                if (event.target === noticeModalShell) {
+                    closeNoticeModal();
+                }
+            });
+        }
+
+        if (noticeModalCloseBtn) {
+            noticeModalCloseBtn.addEventListener('click', closeNoticeModal);
+        }
+
         document.addEventListener('keydown', (event) => {
             if (event.key === 'Escape') {
                 if (videoModal && !videoModal.classList.contains('hidden')) {
                     closeVideoModal();
+                } else if (noticeModal && !noticeModal.classList.contains('hidden')) {
+                    closeNoticeModal();
                 } else if (phaseModal && !phaseModal.classList.contains('hidden')) {
                     closePhaseModal();
                 }
@@ -858,7 +986,9 @@
             });
         }
 
-        const initialCard = cards.find((card) => card.dataset.year === "tu-lieu") || cards[0];
+        const initialCard = cards.find((card) => card.dataset.year === "vietnam-now")
+            || cards.find((card) => card.dataset.year === "tu-lieu")
+            || cards[0];
         if (initialCard) {
             activateMilestone(initialCard, { scrollTop: false });
         }
